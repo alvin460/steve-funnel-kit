@@ -1,0 +1,285 @@
+---
+title: "How I Built the LinkNinja Website"
+description: "Astro, Phaser, Cloudflare Workers, and a chiptune soundtrack. Here's how the LinkNinja marketing site doubles as an in-product onboarding experience."
+publishedAt: 2026-03-02
+author: "Steve Butler"
+tags: ["engineering", "astro", "phaser", "cloudflare", "game-dev"]
+featured: true
+locale: en
+---
+
+# How I Built the LinkNinja Website
+
+Most marketing sites are a hero section, three feature blocks, and a pricing table. I wanted something different. Something that actually shows you what the product does instead of telling you about it.
+
+So I built a 5-beat cinematic game sequence that runs right in the browser. It explains the entire LinkNinja workflow through pixel-art scenes, 8-bit sound effects, and a chiptune soundtrack. And here's the kicker — the exact same code powers the in-product onboarding experience inside the actual dashboard.
+
+One codebase. Two contexts. Zero wasted work.
+
+This post breaks down every layer of the stack, from the static site generator to the retro audio engine.
+
+---
+
+## The Stack at a Glance
+
+| Layer | Tech | Why |
+|-------|------|-----|
+| **Static site** | Astro 5 | Fast builds, zero JS by default, islands architecture |
+| **Game engine** | Phaser 3 | Battle-tested 2D game framework, canvas rendering |
+| **Styling** | Tailwind CSS v4 | CSS-first tokens, no config file needed |
+| **Sound effects** | jsfxr | 3KB library, generates retro WAVs from parameter arrays |
+| **Forms** | React Hook Form | Validation, phone input, async submission |
+| **CRM** | GoHighLevel API | Lead capture straight into our sales pipeline |
+| **Hosting** | Cloudflare Pages | Edge delivery, Workers for API routes |
+| **Dashboard** | Laravel + Inertia.js + React | Where the same game code runs during onboarding |
+
+---
+
+## Why Astro
+
+I needed a site that loads fast, ranks well, and stays out of the way. Astro ships zero JavaScript by default. Pages are pre-rendered HTML. When I need interactivity — like a game engine or a form — I use React islands that hydrate independently.
+
+```astro
+<!-- The game loads only in the browser. No SSR. No hydration mismatch. -->
+<PhaserGame client:only="react" />
+
+<!-- The form hydrates immediately so it's ready when the game ends. -->
+<LeadCaptureForm client:load formTags={['early_access_waitlist']} />
+```
+
+The `client:only="react"` directive is key for Phaser. The game engine needs browser APIs (Canvas, Web Audio) that don't exist on the server. Astro skips it entirely during the build and loads it fresh in the browser.
+
+The rest of the site — blog posts, about page, privacy policy — ships as pure HTML. No framework overhead. Perfect Lighthouse scores.
+
+### Content Collections
+
+Blog posts live as MDX files with typed frontmatter. Astro validates everything at build time with Zod schemas:
+
+```typescript
+const blog = defineCollection({
+  schema: z.object({
+    title: z.string().max(100),
+    description: z.string().max(200),
+    publishedAt: z.coerce.date(),
+    author: z.string().default('Team'),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+    featured: z.boolean().default(false),
+  }),
+});
+```
+
+If I fat-finger a date or forget a required field, the build fails with a clear error. No runtime surprises.
+
+---
+
+## The Phaser Cinematic
+
+This is the centerpiece. When you land on [linkninja.co](https://linkninja.co), you don't see a hero banner. You see a game.
+
+Five beats play out in sequence, each one a Phaser scene:
+
+1. **The DM Jungle** — 363 unread LinkedIn messages pile up chaotically. A pixel ninja lands on a rooftop. A shuriken flies through and sorts them by pipeline stage.
+2. **Order from Chaos** — Messages flow onto a conveyor belt. An AI stamps each one with a stage badge (New Lead, Warm, Hot, Client) and sorts them into buckets.
+3. **Your Shadow Clone** — The ninja performs a jutsu. A ghost clone appears, absorbs your context cards, and starts drafting responses.
+4. **The Dual Wield** — A split-screen shows the dashboard and AI chat working together. Arrows bounce between panels. Everything syncs.
+5. **Begin Training** — A four-step checklist floats in. Connect LinkedIn. Pick your AI. Teach it your style. Triage your first conversations.
+
+Each beat auto-plays its cinematic sequence, then shows a dialog box with typewriter text. Press Enter or click to advance.
+
+### Pixel Art Without Asset Files
+
+The ninja sprites are defined as 2D arrays right in the code. No image files, no sprite sheets, no asset pipeline:
+
+```javascript
+const NINJA_IDLE = [
+  [0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0],
+  [0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0],
+  [0,0,0,1,2,1,2,1,0,0,0,0,0,0,0,0],
+  // ... 16x16 grid
+];
+// 0 = transparent, 1 = dark, 2 = white, 3 = lime green
+```
+
+Each pose (idle, talk, throw, slash, confident, celebrate) is a separate 16x16 grid. At runtime, these get rendered onto a Canvas element and loaded as Phaser textures with `NEAREST` filtering so they stay crisp at 5-8x scale.
+
+Six poses. Zero HTTP requests. The entire character fits in a few KB of JavaScript.
+
+### Scene Orchestration
+
+Every scene uses millisecond-precise timelines built with Phaser's `delayedCall`:
+
+```javascript
+const T = {
+  NINJA_LAND: 800,
+  MESSAGES_START: 1400,
+  SHURIKEN: 5200,
+  TITLE: 9200,
+  DIALOG: 10600,
+};
+```
+
+Tweens handle the actual animations — alpha fades, position slides, scale bounces. The timeline constants keep everything synchronized. Change one number and the whole beat reshuffles.
+
+---
+
+## The Audio System
+
+Sound makes this whole thing feel like a game instead of a slideshow. But browser audio is a minefield of autoplay policies, suspended contexts, and format compatibility. Here's how I handled it.
+
+### Sound Effects with jsfxr
+
+[jsfxr](https://github.com/AhCox/jsfxr) is a tiny library (~3KB) that generates retro sound effects from parameter arrays. No audio files. No downloads. Everything is synthesized at runtime from numbers.
+
+```javascript
+// A shuriken throw — sharp metallic swipe
+shurikenThrow: {
+  wave_type: 1,        // Sawtooth wave
+  p_base_freq: 0.6,
+  p_env_sustain: 0.06,
+  p_env_decay: 0.15,
+  p_freq_ramp: -0.4,   // Pitch drops (swoosh effect)
+  p_duty: 0.8,
+  p_hpf_freq: 0.25,
+  sound_vol: 0.5,
+}
+```
+
+I defined 19 presets — one for each game moment. Typewriter ticks, message pops, badge stamps, clone jutsus, panel slides, achievement dings. They all generate on first load and play from cache after that.
+
+> **Tip:** Use [sfxr.me](https://sfxr.me/) to design sounds interactively, then copy the parameter values into your preset file. Way faster than tweaking numbers blind.
+
+### Music Ducking
+
+The background music (a Suno-generated chiptune track) plays at 25% volume. When any sound effect fires, the music ducks to 14% over 150ms, holds briefly, then recovers over 800ms.
+
+```javascript
+const MUSIC_BASE_VOL = 0.25;   // Resting volume
+const MUSIC_DUCK_VOL = 0.14;   // During SFX
+const DUCK_ATTACK_MS = 150;    // Drop speed
+const DUCK_RELEASE_MS = 800;   // Recovery speed
+const DUCK_HOLD_MS = 200;      // Minimum duck time
+```
+
+This is standard game audio technique. Without ducking, either the music drowns out the effects or the effects feel disconnected from the soundtrack. The duck creates a pocket for each sound to land in.
+
+Rapid-fire SFX (like typewriter ticks or a burst of message pops) extend the hold window without stacking volume drops. The music stays down until the barrage ends, then floats back up.
+
+### Muted by Default
+
+Browser autoplay policy means you can't play audio without a user gesture. Rather than fighting it, I lean into it:
+
+- Everything starts muted. Always.
+- A prominent "ENABLE SOUND" banner appears at the bottom of the screen with a gentle bounce animation.
+- The small speaker toggle in the top-left corner handles ongoing mute/unmute.
+- One click unlocks the AudioContext, starts the music fade-in, and enables all SFX.
+
+No autoplay hacks. No console warnings. Works in every browser.
+
+---
+
+## Killing Two Birds
+
+Here's the architectural trick that saved me weeks of work.
+
+The LinkNinja dashboard is built with Laravel, Inertia.js, and React. When a new user signs up, they hit an onboarding flow before seeing the dashboard. That onboarding flow needs to explain the product — what pipeline stages are, how AI classification works, what the dashboard layout looks like.
+
+Instead of building separate explainer screens for the dashboard, I made the Phaser cinematic portable. The same scene files, the same sprites, the same audio system — they run in both places:
+
+```
+linkninja-marketing/src/phaser/    ← Marketing site
+sfc-dashboard/resources/js/Phaser/ ← Product dashboard
+```
+
+Same code. Different wrappers. The marketing site wraps it in an Astro page with a lead capture form. The dashboard wraps it in an Inertia layout with onboarding state management.
+
+The React bridge component handles the context difference:
+
+```jsx
+// Marketing site — game ends → open signup dialog
+onGameComplete={() => openDialog('early-access-dialog')}
+
+// Dashboard — game ends → advance to onboarding step 2
+onBeatComplete={() => onNextBeat()}
+```
+
+When I add a new scene or tweak an animation, I copy the files across and both versions update. The sync is manual right now (a `cp` command), but the point is there's only one version of the truth.
+
+---
+
+## Cloudflare Pages + Edge API Routes
+
+The site is static-first. Every page is pre-built HTML, served from Cloudflare's edge network. But I need a few dynamic endpoints for lead capture.
+
+### Lead Capture Flow
+
+When someone fills out the early access form, the data flows through an API route that runs as a Cloudflare Worker:
+
+```
+Form submit → POST /api/lead → Validate → Upsert to GoHighLevel → Return contactId
+```
+
+The API route validates the input (email format, phone in E.164, XSS protection), then upserts the contact into GoHighLevel with the right tags and source attribution:
+
+```typescript
+// Validation strips anything sketchy
+function validateLeadForm(data) {
+  const email = data.email?.replace(/[<>]/g, '').trim();
+  const phone = data.phone?.replace(/[<>]/g, '').trim();
+  // E.164 phone validation, email regex, name splitting...
+}
+```
+
+Duplicate handling is graceful — if GHL returns a 409 or 422 (contact exists), we treat it as a success and return the existing contact ID. Nobody gets an error for signing up twice.
+
+### Multi-Platform Ready
+
+The site has config files for Cloudflare (`wrangler.toml`), Vercel (`vercel.json`), and Netlify (`netlify.toml`). Same codebase deploys anywhere. Security headers, cache rules, and API route mappings are defined per platform.
+
+The cache strategy is simple: fonts and hashed Astro bundles get cached for a year (immutable). Everything else is fresh.
+
+---
+
+## The Design System
+
+Tailwind CSS v4 dropped the JavaScript config file entirely. Everything lives in CSS:
+
+```css
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  /* ... 100+ tokens */
+}
+```
+
+Colors flow through three tiers:
+
+1. **Primitives** — Raw color scales (`brand-50` through `brand-900`)
+2. **Semantic tokens** — Purpose-mapped (`--color-primary`, `--color-border`, `--color-foreground-muted`)
+3. **Tailwind classes** — `bg-primary`, `text-foreground`, `border-border`
+
+The brand palette is simple: near-black background (`#0D0D0D`), off-white text, and lime green accents (`#CEF17B`). The green pops against the dark background and ties directly into the Phaser game's color scheme — ninja sprites, UI borders, and progress indicators all use the same `#CEF17B`.
+
+---
+
+## What I Learned
+
+**Show, don't tell.** A 60-second game sequence communicates more about the product than a page of bullet points. People remember what they experience, not what they read.
+
+**Reuse aggressively.** The onboarding cinematic cost me weeks to build. Using it on the marketing site too meant that investment paid off twice. Same scenes, same sounds, same emotional arc.
+
+**Sound is worth the effort.** The difference between the muted and unmuted experience is night and day. Those little 8-bit pops and whooshes turn a visual demo into something that feels alive. The ducking system keeps the music and effects in harmony without any manual mixing.
+
+**Static-first is the right default.** Most pages on a marketing site don't need JavaScript. Astro lets me ship pure HTML for those pages and bring in React only where interactivity matters. The result is a fast site that doesn't sacrifice developer experience.
+
+**Edge functions are perfect for forms.** A lead capture endpoint doesn't need a full backend server. A Cloudflare Worker validates the input, calls the CRM API, and returns a response in under 100ms from wherever the user is in the world.
+
+---
+
+## Try It
+
+Head to [linkninja.co](https://linkninja.co) and enable sound. Watch the five beats play out. If you're building a SaaS product and your marketing site is just a static landing page, consider whether you could show the product experience directly — even in a simplified, stylized way.
+
+The code is the marketing.

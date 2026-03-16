@@ -1,0 +1,77 @@
+---
+import '@/styles/global.css'
+import SEO from '@/components/seo/SEO.astro'
+import Logo from '@/components/ui/marketing/Logo/Logo.astro'
+import siteConfig from '@/config/site.config'
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/svg+xml" href={siteConfig.branding.favicon.svg} />
+    <meta name="theme-color" content={siteConfig.branding.colors.themeColor} />
+
+    <SEO title="You're on the waitlist" description="Welcome to LinkNinja. We'll let you know when your ninja is ready." noindex={true} />
+  </head>
+
+  <body class="relative flex min-h-screen flex-col items-center justify-center bg-background text-foreground antialiased overflow-hidden">
+    {/* Background ninja icon — top right, faded */}
+    <div class="pointer-events-none absolute -top-16 -right-16 opacity-[0.04]" aria-hidden="true">
+      <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z" fill="currentColor"/>
+        <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <main class="relative z-10 w-full max-w-md px-6 text-center">
+      {/* Logo */}
+      <a href="/" class="mb-10 inline-block" aria-label={siteConfig.name}>
+        <Logo size="lg" variant="full" forceDark={true} />
+      </a>
+
+      {/* Checkmark */}
+      <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand-300/10">
+        <svg class="h-8 w-8 text-brand-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h1 class="mb-3 text-2xl font-bold tracking-tight text-foreground">
+        You're on the waitlist.
+      </h1>
+      <p class="mb-10 text-foreground-muted">
+        We'll let you know when your ninja is ready.
+      </p>
+
+      {/* Skool upsell */}
+      <div class="rounded-xl border border-border bg-secondary/50 p-6">
+        <p class="mb-1 text-sm font-semibold text-foreground">
+          Want priority access?
+        </p>
+        <p class="mb-5 text-sm text-foreground-muted">
+          Seven Figure Creator members get first dibs.
+        </p>
+        <a
+          href="https://www.skool.com/six-figure-creators/about"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-foreground transition-all duration-150 hover:bg-secondary hover:border-border-strong active:scale-[0.98]"
+        >
+          Join the Community
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+      </div>
+
+      {/* Back link */}
+      <a href="/" class="mt-8 inline-block text-sm text-foreground-muted transition-colors hover:text-foreground">
+        &larr; Back to home
+      </a>
+    </main>
+  </body>
+</html>

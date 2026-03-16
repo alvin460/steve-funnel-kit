@@ -1,0 +1,1118 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import { Hero } from '@/components/hero';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Accordion from '@/components/ui/overlay/Accordion/Accordion.astro';
+import CTASection from '@/components/ui/marketing/CTA/CTA.astro';
+import SocialProof from '@/components/ui/marketing/SocialProof/SocialProof.astro';
+import Dialog from '@/components/ui/overlay/Dialog/Dialog.astro';
+import LeadCaptureForm from '../components/forms/LeadCaptureForm.tsx';
+
+const formTags = ['linkninja_lead', 'homepage_playbook'];
+const termsHtml = `<p>By providing my information, I agree to receive communications from LinkNinja and accept the <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>`;
+
+/* ── Data ── */
+
+const corePowers = [
+  {
+    emoji: '🤖',
+    title: 'Ask Your AI Anything',
+    description: '"Who went cold this week?" "Who mentioned budget?" Ask Claude, ChatGPT, or Groq about your pipeline. Bulk update tags, stages, and notes by just telling it what to do.',
+  },
+  {
+    emoji: '📊',
+    title: '8-Stage Pipeline',
+    description: 'Every DM auto-sorted. Hot, warm, cold, ghosted — and everything in between. AI understands context, not just keywords.',
+  },
+  {
+    emoji: '👻',
+    title: 'Ghost Detection',
+    description: 'Five levels: Ghosted → Gone Cold → Deep Freeze → Permafrost. Each with a recommended next move. You never wonder "whose turn is it?" again.',
+  },
+  {
+    emoji: '🔥',
+    title: 'Warmth Scoring',
+    description: '0–10 score based on DM behavior, post engagement, and response speed. The hottest conversations rise to the top.',
+  },
+  {
+    emoji: '✂️',
+    title: 'Smart Snippets',
+    description: 'Save your best replies. Track which ones actually get responses. Stop guessing — send what works.',
+  },
+  {
+    emoji: '☀️',
+    title: 'Daily Brief',
+    description: 'Every morning: who replied, who went cold, who needs you today. Open it. Know your moves. Close your laptop in 10 minutes.',
+  },
+  {
+    emoji: '📣',
+    title: 'Post → Pipeline',
+    description: 'Someone comments on your post? They just raised their hand. See who engages with your content and slide into the DM.',
+  },
+  {
+    emoji: '🔗',
+    title: 'CRM + Sales Nav Sync',
+    description: 'Two-way GoHighLevel sync. Sales Navigator importing. One pipeline. No copy-pasting contacts between tabs.',
+  },
+];
+
+const faqItems = [
+  {
+    title: 'Is this an automation tool?',
+    content: "No. LinkNinja doesn't send messages, schedule messages, or auto-reply. You write every word. AI classifies your conversations, builds your pipeline, and tells you who to talk to next. You stay in control.",
+  },
+  {
+    title: 'Will this get my LinkedIn account restricted?',
+    content: "No. We don't scrape, don't bot, and don't auto-message. Your conversations sync through authorized channels. Your messages are encrypted. Built this way on purpose.",
+  },
+  {
+    title: 'What CRM does it work with?',
+    content: "GoHighLevel (GHL) — full two-way sync for contacts, tags, pipeline stages, and conversation history. More integrations on the roadmap.",
+  },
+  {
+    title: 'Do I need Sales Navigator?',
+    content: "No. Everything works with any LinkedIn account. Sales Navigator unlocks lead list importing and saved search syncing, but it's a bonus, not a requirement.",
+  },
+  {
+    title: 'What AI models does it use?',
+    content: "Claude, GPT-4, and Groq. You bring your own API key — no per-message fees, full control over which model processes your conversations.",
+  },
+  {
+    title: 'Can I cancel anytime?',
+    content: "Monthly plans cancel with one click. Annual plans are billed upfront. Both include everything — no feature gates, no tier limits.",
+  },
+  {
+    title: "Is $299/mo worth it?",
+    content: "If you close even one extra deal per month from a conversation you would have missed, LinkNinja pays for itself many times over. The average user has 40-200+ active DM conversations. Recovering a single ghosted thread is worth more than a year of the subscription for most high-ticket closers.",
+  },
+  {
+    title: "What's SevenFigureCreators.com?",
+    content: "Community and training included with every subscription. DM selling frameworks, conversation openers, objection handlers, and a network of closers who sell by chat.",
+  },
+];
+
+const planFeatures = [
+  '8-Stage AI Pipeline',
+  'Ghost Detection (5 levels)',
+  '0–10 Warmth Scoring',
+  'Custom Pipeline Stages',
+  'GoHighLevel Two-Way Sync',
+  'Sales Navigator Importing',
+  'Smart Snippets + Reply Tracking',
+  'Daily Brief Every Morning',
+  'Ask Any AI About Your Pipeline',
+  'Post → Pipeline Tracking',
+  'Semantic Search Across All DMs',
+  'SevenFigureCreators.com Community',
+];
+---
+
+<BaseLayout
+  title="LinkNinja — AI-Powered Sales Pipeline for LinkedIn DMs"
+  description="Your LinkedIn DMs are full of deals you're losing. LinkNinja sorts every conversation, catches every ghost, and tells you who to message next. No bots. No spam. Just a real sales pipeline for your DMs."
+>
+  <Header
+    slot="header"
+    position="fixed"
+    size="lg"
+    scrollReveal
+    showCta
+    cta={{ label: 'Get FREE Playbook', href: '#playbook' }}
+    extraNav={[
+      { label: 'Features', href: '#features' },
+      { label: 'Pricing', href: '#pricing' },
+    ]}
+  />
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 1. HERO                                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <Hero layout="split" size="lg" showGrid showBlob blobPosition="right">
+    <Badge slot="badge" pill pulse>The Sales Pipeline LinkedIn Never Built</Badge>
+
+    <h1 slot="title">
+      You're losing deals in your LinkedIn DMs.
+    </h1>
+
+    <p slot="description">
+      Turn your LinkedIn DMs into a real sales pipeline. Every conversation sorted into stages. Five levels of ghosting detected. You wake up knowing exactly who to message today.
+    </p>
+
+    <Fragment slot="actions">
+      <Button size="lg" data-open-dialog="playbook-dialog">
+        Get the Free Playbook
+        <Icon name="arrow-right" size="sm" />
+      </Button>
+      <Button size="lg" variant="outline" href="#features">
+        See How It Works
+      </Button>
+    </Fragment>
+
+    <SocialProof
+      class="mt-[var(--space-stack-lg)]"
+      text="Used by LinkedIn closers doing $10K–$500K/mo in DM-sourced revenue"
+      avatarCount={4}
+    />
+
+    <!-- CHANGE 7: Product Architecture Diagram (was TerminalDemo) -->
+    <div slot="aside" class="relative w-full max-w-md mx-auto">
+      <!-- Central ninja hub -->
+      <div class="relative flex items-center justify-center">
+        <!-- Background glow -->
+        <div class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+          <div class="h-48 w-48 rounded-full bg-brand-300/10 blur-3xl"></div>
+        </div>
+
+        <div class="relative grid grid-cols-3 gap-3 w-full">
+          <!-- Left card: Sales Navigator -->
+          <div class="hero-arch-card rounded-xl border border-border bg-card p-3 shadow-sm space-y-2">
+            <div class="flex items-center gap-1.5">
+              <div class="h-5 w-5 rounded bg-blue-500 flex items-center justify-center">
+                <span class="text-white text-[8px] font-bold">in</span>
+              </div>
+              <span class="text-[10px] font-bold text-foreground truncate">Sales Nav</span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-1">
+                <div class="h-1 w-1 rounded-full bg-brand-300"></div>
+                <div class="h-1.5 flex-1 rounded bg-foreground/8"></div>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="h-1 w-1 rounded-full bg-brand-300"></div>
+                <div class="h-1.5 w-3/4 rounded bg-foreground/8"></div>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="h-1 w-1 rounded-full bg-brand-300"></div>
+                <div class="h-1.5 w-2/3 rounded bg-foreground/8"></div>
+              </div>
+            </div>
+            <div class="text-[8px] text-foreground-muted font-mono">Lead Lists</div>
+          </div>
+
+          <!-- Center: Ninja hub -->
+          <div class="flex flex-col items-center justify-center gap-2">
+            <!-- Dotted lines to left -->
+            <svg class="absolute left-[calc(33%-0.5rem)] top-1/2 -translate-y-1/2 w-[calc(17%)] h-0.5 hidden md:block" aria-hidden="true">
+              <line x1="0" y1="1" x2="100%" y2="1" stroke="var(--brand-300)" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+            </svg>
+            <!-- Dotted lines to right -->
+            <svg class="absolute right-[calc(33%-0.5rem)] top-1/2 -translate-y-1/2 w-[calc(17%)] h-0.5 hidden md:block" aria-hidden="true">
+              <line x1="0" y1="1" x2="100%" y2="1" stroke="var(--brand-300)" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+            </svg>
+
+            <div class="relative h-20 w-20 rounded-2xl border-2 border-brand-300 bg-card shadow-lg flex items-center justify-center">
+              <div class="absolute inset-0 rounded-2xl bg-brand-300/5"></div>
+              <svg viewBox="0 0 400 400" fill="none" class="h-12 w-12 text-foreground relative z-10">
+                <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z" fill="currentColor"/>
+                <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="text-[10px] font-bold text-foreground-muted font-mono uppercase tracking-wider">LinkNinja</span>
+          </div>
+
+          <!-- Right card: CRM Pipeline -->
+          <div class="hero-arch-card rounded-xl border border-border bg-card p-3 shadow-sm space-y-2">
+            <div class="flex items-center gap-1.5">
+              <div class="h-5 w-5 rounded bg-brand-300 flex items-center justify-center">
+                <svg viewBox="0 0 20 20" fill="var(--gray-950)" class="h-3 w-3"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"/></svg>
+              </div>
+              <span class="text-[10px] font-bold text-foreground truncate">Pipeline</span>
+            </div>
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-1">
+                <div class="h-3.5 flex-1 rounded bg-[var(--error)]/15 flex items-center px-1"><span class="text-[7px] text-foreground-muted">Hot</span></div>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="h-3.5 flex-1 rounded bg-[var(--warning)]/15 flex items-center px-1"><span class="text-[7px] text-foreground-muted">Warm</span></div>
+              </div>
+              <div class="flex items-center gap-1">
+                <div class="h-3.5 flex-1 rounded bg-blue-500/10 flex items-center px-1"><span class="text-[7px] text-foreground-muted">Cold</span></div>
+              </div>
+            </div>
+            <div class="text-[8px] text-foreground-muted font-mono">8 Stages</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom card: AI Processing -->
+      <div class="mt-3 mx-auto max-w-[200px]">
+        <!-- Dotted line from center hub down -->
+        <svg class="mx-auto h-3 w-0.5 mb-1" aria-hidden="true">
+          <line x1="1" y1="0" x2="1" y2="100%" stroke="var(--brand-300)" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.5"/>
+        </svg>
+        <div class="hero-arch-card rounded-xl border border-border bg-card p-3 shadow-sm text-center">
+          <div class="flex items-center justify-center gap-1.5 mb-1">
+            <span class="text-xs">🤖</span>
+            <span class="text-[10px] font-bold text-foreground">AI Processing</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span class="inline-flex items-center rounded-full bg-brand-300/10 px-1.5 py-0.5 text-[7px] font-medium text-brand-700 dark:text-brand-300">Claude</span>
+            <span class="inline-flex items-center rounded-full bg-brand-300/10 px-1.5 py-0.5 text-[7px] font-medium text-brand-700 dark:text-brand-300">GPT-4</span>
+            <span class="inline-flex items-center rounded-full bg-brand-300/10 px-1.5 py-0.5 text-[7px] font-medium text-brand-700 dark:text-brand-300">Groq</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Hero>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SP1. LOGO TRUST BAR                                               -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background border-b border-border py-[var(--space-section-xs)]">
+    <div class="mx-auto max-w-5xl px-6">
+      <p class="text-center text-xs font-mono uppercase tracking-wider text-foreground-muted mb-6">
+        Trusted by closers at
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-40 grayscale">
+        <!-- Placeholder logos — replace with real customer/partner logos -->
+        <div class="h-7 w-24 rounded bg-foreground/10"></div>
+        <div class="h-7 w-28 rounded bg-foreground/10"></div>
+        <div class="h-7 w-20 rounded bg-foreground/10"></div>
+        <div class="h-7 w-32 rounded bg-foreground/10"></div>
+        <div class="h-7 w-24 rounded bg-foreground/10"></div>
+        <div class="h-7 w-28 rounded bg-foreground/10"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 2. PROBLEM                                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background relative overflow-hidden py-[var(--space-section-md)]">
+    <!-- Decorative ghost emoji watermark -->
+    <div class="pointer-events-none absolute -right-6 top-12 text-[8rem] opacity-[0.06] md:text-[12rem] lg:right-12 lg:top-8 lg:text-[16rem]" aria-hidden="true">👻</div>
+    <!-- Ghost SVG illustration (layered behind, larger screens) -->
+    <div class="pointer-events-none absolute -right-4 top-24 h-[10rem] w-[10rem] opacity-[0.04] hidden lg:block lg:right-8 lg:top-16 lg:h-[18rem] lg:w-[18rem]" aria-hidden="true">
+      <img src="/images/ghosted.svg" alt="" class="h-full w-full" />
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-6">
+      <!-- Two-column: LinkedIn mockup + text (per Figma inspiration) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-[var(--space-section-gap)]">
+        <!-- Left: Ghosted SVG Illustration -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative w-full max-w-sm mx-auto lg:mx-0">
+            <img src="/images/ghosted.svg" alt="LinkedIn messaging inbox showing conversations going cold" class="w-full h-auto drop-shadow-lg" loading="lazy" />
+            <!-- Floating lime accent dots -->
+            <div class="pointer-events-none absolute -top-2 -right-2 h-5 w-5 rounded-full bg-brand-300 opacity-50 hidden md:block" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute -bottom-4 -left-3 h-3 w-3 rounded-full bg-brand-300 opacity-30 hidden md:block" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Right: Problem Description -->
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <div class="max-w-2xl lg:max-w-none space-y-6">
+            <div class="text-foreground-muted mb-4 flex items-center gap-2 text-sm font-bold tracking-wide uppercase font-mono">
+              <Icon name="alert-circle" size="sm" />
+              <span>The Real Problem</span>
+            </div>
+            <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance text-foreground leading-[1.1]">
+              LinkedIn wasn't built for selling. You're using it anyway.
+            </h2>
+            <p class="text-lg text-foreground-muted leading-relaxed">
+              You've got hundreds of open conversations right now. Some are ready to close. Some went cold last week. A few are ghosting you. And you have no way to tell which is which.
+            </p>
+            <div class="space-y-4 text-foreground-secondary text-base leading-relaxed">
+              <p>No tagging. No filters that matter. No way to track who's hot, who needs a follow-up, or who ghosted you 3 days ago.</p>
+              <p>You scroll. You forget. You drop leads. And you're constantly thinking — <em>"Did I already message that guy? Or was it someone else who kind of looked the same?"</em></p>
+              <p class="font-medium text-foreground">This is how deals die — quietly, in the inbox.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem cards (original) -->
+      <div class="grid gap-[var(--space-content-gap)] md:grid-cols-2 lg:grid-cols-3 mb-[var(--space-section-gap)]">
+        <Card variant="outline" padding="lg">
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="h-8 w-8 rounded-full bg-secondary"></div>
+                <div>
+                  <p class="text-sm font-semibold text-foreground">James Rodriguez</p>
+                  <p class="text-xs text-foreground-muted">4 days ago</p>
+                </div>
+              </div>
+              <Icon name="alert-triangle" size="sm" class="text-warning" />
+            </div>
+            <p class="text-sm text-foreground-muted italic">"Sounds great, send me the link"</p>
+            <span class="inline-block w-fit text-xs bg-[var(--error)]/10 text-[var(--error)] px-2.5 py-0.5 rounded-full font-medium">You never replied</span>
+            <p class="text-xs text-foreground-muted">Dead deal. You just didn't know it yet.</p>
+          </div>
+        </Card>
+
+        <Card variant="outline" padding="lg">
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="h-8 w-8 rounded-full bg-secondary"></div>
+                <div>
+                  <p class="text-sm font-semibold text-foreground">Sarah Kim</p>
+                  <p class="text-xs text-foreground-muted">Last week</p>
+                </div>
+              </div>
+              <Icon name="alert-triangle" size="sm" class="text-warning" />
+            </div>
+            <p class="text-sm text-foreground-muted italic">"Can you send that over Monday?"</p>
+            <span class="inline-block w-fit text-xs bg-[var(--error)]/10 text-[var(--error)] px-2.5 py-0.5 rounded-full font-medium">Buried on page 3</span>
+            <p class="text-xs text-foreground-muted">She asked. You forgot. She moved on.</p>
+          </div>
+        </Card>
+
+        <Card variant="outline" padding="lg">
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="h-8 w-8 rounded-full bg-secondary"></div>
+                <div>
+                  <p class="text-sm font-semibold text-foreground">Mike Torres</p>
+                  <p class="text-xs text-foreground-muted">2 weeks ago</p>
+                </div>
+              </div>
+              <Icon name="alert-triangle" size="sm" class="text-warning" />
+            </div>
+            <p class="text-sm text-foreground-muted italic">"Let me check with my partner"</p>
+            <span class="inline-block w-fit text-xs bg-[var(--error)]/10 text-[var(--error)] px-2.5 py-0.5 rounded-full font-medium">No follow-up set</span>
+            <p class="text-xs text-foreground-muted">Classic buying signal. Zero follow-through.</p>
+          </div>
+        </Card>
+      </div>
+
+      <!-- Stat card -->
+      <div class="mx-auto max-w-2xl text-center">
+        <Card variant="solid" padding="lg">
+          <div class="flex items-center justify-center gap-4">
+            <Icon name="alert-circle" size="md" class="text-warning shrink-0" />
+            <div class="text-left">
+              <p class="text-sm font-semibold text-foreground">Most DM conversations go cold</p>
+              <p class="text-xs text-foreground-muted">Not because the lead wasn't interested — because nobody was tracking the thread.</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SP2. FEATURED TESTIMONIAL — validates the problem                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background border-y border-border py-[var(--space-section-sm)]">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <blockquote class="relative">
+        <div class="text-brand-300/20 text-6xl font-serif leading-none absolute -top-4 left-1/2 -translate-x-1/2">"</div>
+        <p class="text-xl md:text-2xl font-medium text-foreground leading-relaxed pt-8">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. I was losing two or three deals a week just from not following up. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <footer class="mt-6 flex items-center justify-center gap-3">
+          <div class="h-12 w-12 rounded-full bg-secondary border-2 border-border"></div>
+          <div class="text-left">
+            <p class="text-sm font-semibold text-foreground">First Last</p>
+            <p class="text-xs text-foreground-muted">Title, Company Name</p>
+          </div>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 4. AGITATE — "Closers. Not Spammers."                            -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="invert-section bg-background py-[var(--space-section-md)]">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-[var(--space-section-gap)] lg:grid-cols-2">
+        <div>
+          <div class="text-foreground-muted mb-4 flex items-center gap-2 text-sm font-bold tracking-wide uppercase font-mono">
+            <Icon name="shield" size="sm" />
+            <span>Built for Closers</span>
+          </div>
+
+          <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance text-foreground leading-[1.1] mb-[var(--space-heading-gap)]">
+            You can close. You just can't keep track.
+          </h2>
+
+          <div class="text-foreground-secondary space-y-4 text-lg leading-relaxed">
+            <p>
+              Sound familiar? Here's why it keeps happening.
+            </p>
+            <p>
+              You don't need a faster inbox. A hundred keyboard shortcuts won't save a deal that's already cold. And automation that blasts messages for you? That gets accounts banned.
+            </p>
+            <p>
+              You build trust. You earn the call. You close in the DMs. But LinkedIn gives you zero tools to manage that process. No tags. No stages. No way to know who you forgot to reply to.
+            </p>
+            <!-- CHANGE 3: Lime left-border callout box -->
+            <div class="border-l-4 border-brand-300 bg-brand-300/5 pl-5 py-4 rounded-r-lg">
+              <p class="text-xl font-semibold"><strong class="text-foreground">You're a closer using a mailbox.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 text-foreground-secondary">
+              <Icon name="alert-circle" size="sm" class="text-warning mt-0.5 shrink-0" />
+              <span>Your "CRM" is a spreadsheet you update when you remember to.</span>
+            </li>
+            <li class="flex items-start gap-3 text-foreground-secondary">
+              <Icon name="alert-circle" size="sm" class="text-warning mt-0.5 shrink-0" />
+              <span>You've got 40 active conversations and no idea which ones are actually warm.</span>
+            </li>
+            <li class="flex items-start gap-3 text-foreground-secondary">
+              <Icon name="alert-circle" size="sm" class="text-warning mt-0.5 shrink-0" />
+              <span>Someone said "let's do it" three days ago. You haven't replied.</span>
+            </li>
+            <li class="flex items-start gap-3 text-foreground-secondary">
+              <Icon name="alert-circle" size="sm" class="text-warning mt-0.5 shrink-0" />
+              <span>Your follow-up system is "scroll until I see their face."</span>
+            </li>
+          </ul>
+
+          <div class="border-border mt-[var(--space-stack-lg)] grid grid-cols-3 gap-[var(--space-stack-lg)] border-t pt-[var(--space-stack-lg)]">
+            <div>
+              <div class="font-display text-foreground text-3xl font-bold">40–200+</div>
+              <div class="text-foreground-muted text-sm">active DM conversations at any time</div>
+            </div>
+            <div>
+              <div class="font-display text-foreground text-3xl font-bold">5–12</div>
+              <div class="text-foreground-muted text-sm">touches to close a DM deal</div>
+            </div>
+            <div>
+              <div class="font-display text-foreground text-3xl font-bold">0</div>
+              <div class="text-foreground-muted text-sm">visibility into which ones matter</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 5. SOLUTION — Feature Grid                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CHANGE 2a: Added radial lime gradient background -->
+  <section id="features" class="relative overflow-hidden py-[var(--space-section-md)]" style="background: var(--background); background-image: radial-gradient(ellipse 50% 40% at 70% 30%, oklch(from var(--brand-300) l c h / 0.06) 0%, transparent 70%)">
+    <!-- Decorative ninja logomark watermark -->
+    <div
+      class="pointer-events-none absolute -top-8 right-8 hidden h-[28rem] w-[28rem] opacity-[0.04] grayscale md:block lg:top-10 lg:right-24 lg:h-[44rem] lg:w-[44rem] dark:opacity-[0.06]"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 400 400" fill="none" class="h-full w-full">
+        <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z" fill="currentColor"/>
+        <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-6">
+      <div class="mx-auto max-w-3xl text-center mb-[var(--space-section-gap)]">
+        <div class="text-foreground-muted mb-4 flex items-center justify-center gap-2 text-sm font-bold tracking-wide uppercase font-mono">
+          <Icon name="zap" size="sm" />
+          <span>What You Get</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance text-foreground leading-[1.1] mb-[var(--space-heading-gap)]">
+          Everything you need.<br />Nothing you don't.
+        </h2>
+        <p class="text-lg text-foreground-muted leading-relaxed">
+          An 8-stage sales pipeline for your DMs. AI that classifies every conversation. Ghost detection that catches what you miss. And you can ask it anything — "who went cold this week?" — in plain English.
+        </p>
+      </div>
+
+      <!-- CHANGE 4: Lime border on lead feature card -->
+      <div class="grid gap-[var(--space-content-gap)] md:grid-cols-2 lg:grid-cols-4">
+        {corePowers.map((p, i) => (
+          <Card hover class={i === 0 ? 'ring-2 ring-brand-300/40' : ''}>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl" role="img">{p.emoji}</span>
+              </div>
+              <h3 class="text-sm font-bold text-foreground">{p.title}</h3>
+              <p class="text-sm text-foreground-muted leading-relaxed">{p.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SP3. TESTIMONIAL CARDS — feature validation                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background border-t border-border py-[var(--space-section-sm)]">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="grid gap-[var(--space-content-gap)] md:grid-cols-3">
+        <Card padding="lg">
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-1">
+              {[1,2,3,4,5].map(() => (
+                <Icon name="star" size="xs" class="text-brand-300 fill-brand-300" />
+              ))}
+            </div>
+            <p class="text-sm text-foreground leading-relaxed">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. The ghost detection caught three deals I'd completely forgotten about."
+            </p>
+            <Badge variant="brand" pill size="sm">Ghost Detection</Badge>
+            <div class="flex items-center gap-3 pt-2 border-t border-border">
+              <div class="h-9 w-9 rounded-full bg-secondary border border-border"></div>
+              <div>
+                <p class="text-xs font-semibold text-foreground">First Last</p>
+                <p class="text-[10px] text-foreground-muted">Coach, $XX K/mo</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card padding="lg">
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-1">
+              {[1,2,3,4,5].map(() => (
+                <Icon name="star" size="xs" class="text-brand-300 fill-brand-300" />
+              ))}
+            </div>
+            <p class="text-sm text-foreground leading-relaxed">
+              "Sed do eiusmod tempor incididunt ut labore. I just ask my AI 'who mentioned budget this week?' and it pulls the answer."
+            </p>
+            <Badge variant="brand" pill size="sm">Ask Your AI Anything</Badge>
+            <div class="flex items-center gap-3 pt-2 border-t border-border">
+              <div class="h-9 w-9 rounded-full bg-secondary border border-border"></div>
+              <div>
+                <p class="text-xs font-semibold text-foreground">First Last</p>
+                <p class="text-[10px] text-foreground-muted">Agency Owner, $XX K/mo</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        <Card padding="lg">
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-1">
+              {[1,2,3,4,5].map(() => (
+                <Icon name="star" size="xs" class="text-brand-300 fill-brand-300" />
+              ))}
+            </div>
+            <p class="text-sm text-foreground leading-relaxed">
+              "Ut enim ad minim veniam, quis nostrud exercitation. The daily brief alone saved me an hour every morning."
+            </p>
+            <Badge variant="brand" pill size="sm">AI Daily Brief</Badge>
+            <div class="flex items-center gap-3 pt-2 border-t border-border">
+              <div class="h-9 w-9 rounded-full bg-secondary border border-border"></div>
+              <div>
+                <p class="text-xs font-semibold text-foreground">First Last</p>
+                <p class="text-[10px] text-foreground-muted">Consultant, $XX K/mo</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 5b. HOW IT WORKS — 3 Steps                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background-secondary border-y border-border relative overflow-hidden py-[var(--space-section-sm)]">
+    <!-- Decorative hand SVG + ghost emoji watermark -->
+    <div class="pointer-events-none absolute -right-4 -top-8 h-[8rem] w-[8rem] opacity-[0.12] md:h-[11rem] md:w-[11rem] lg:right-16 lg:-top-4 lg:h-[14rem] lg:w-[14rem]" aria-hidden="true">
+      <img src="/images/hand-volumetric.svg" alt="" class="h-full w-full" />
+    </div>
+    <div class="pointer-events-none absolute left-4 bottom-2 text-[5rem] opacity-[0.05] md:text-[7rem] lg:left-12" aria-hidden="true">👍</div>
+    <div class="relative mx-auto max-w-4xl px-6">
+      <div class="text-center mb-[var(--space-heading-gap)]">
+        <h2 class="font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+          Set up takes 60 seconds. Not kidding.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-3xl mb-3">🔌</div>
+          <p class="text-sm font-semibold text-foreground">Connect your LinkedIn</p>
+          <p class="text-xs text-foreground-muted mt-1">Secure sync. Takes 60 seconds.</p>
+        </div>
+        <div>
+          <div class="text-3xl mb-3">🧠</div>
+          <p class="text-sm font-semibold text-foreground">AI organizes your pipeline</p>
+          <p class="text-xs text-foreground-muted mt-1">Every DM classified, scored, and staged automatically.</p>
+        </div>
+        <div>
+          <div class="text-3xl mb-3">🎯</div>
+          <p class="text-sm font-semibold text-foreground">Know who to message next</p>
+          <p class="text-xs text-foreground-muted mt-1">Daily brief + pipeline view. No more guessing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 6. MID-PAGE CTA — Playbook                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CHANGE 2b: Added radial lime gradient background -->
+  <CTASection id="playbook" variant="default" size="sm" maxWidth="lg" class="bg-background-secondary border-y border-border playbook-gradient">
+    <Badge slot="logo" variant="brand" pill>
+      <Icon name="book" size="xs" />
+      Free Download
+    </Badge>
+
+    <h2 slot="heading">
+      Steal the playbook. It's free. 🥷
+    </h2>
+
+    <p slot="description">
+      The exact DM openers, follow-up sequences, and objection handlers used by seven-figure closers. 14 pages. No fluff. No credit card.
+    </p>
+
+    <Fragment slot="actions">
+      <Button size="lg" data-open-dialog="playbook-dialog">
+        Send Me the Playbook
+        <Icon name="arrow-right" size="sm" />
+      </Button>
+    </Fragment>
+  </CTASection>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 7. COMPLIANCE                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background relative overflow-hidden py-[var(--space-section-md)]">
+    <!-- Decorative shield emoji watermark -->
+    <div class="pointer-events-none absolute -left-4 top-16 text-[8rem] opacity-[0.05] md:text-[12rem] lg:left-12 lg:top-8 lg:text-[14rem]" aria-hidden="true">🛡️</div>
+    <div class="relative mx-auto max-w-6xl px-6">
+      <div class="mx-auto max-w-3xl text-center mb-[var(--space-section-gap)]">
+        <div class="text-foreground-muted mb-4 flex items-center justify-center gap-2 text-sm font-bold tracking-wide uppercase font-mono">
+          <Icon name="shield" size="sm" />
+          <span>Your Account Is Safe</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance text-foreground leading-[1.1]">
+          No scraping. No bots. No bans.
+        </h2>
+      </div>
+
+      <div class="grid gap-[var(--space-content-gap)] md:grid-cols-3 max-w-4xl mx-auto">
+        <Card padding="lg">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl shrink-0">🚫</span>
+            <div>
+              <p class="text-base font-bold text-foreground">No scraping.</p>
+              <p class="text-sm text-foreground-muted mt-1">Conversations sync through authorized channels. Nothing that triggers LinkedIn's detection systems.</p>
+            </div>
+          </div>
+        </Card>
+        <Card padding="lg">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl shrink-0">🙅</span>
+            <div>
+              <p class="text-base font-bold text-foreground">No automation.</p>
+              <p class="text-sm text-foreground-muted mt-1">You send every message. LinkNinja tells you who and what — you press send.</p>
+            </div>
+          </div>
+        </Card>
+        <Card padding="lg">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl shrink-0">🔒</span>
+            <div>
+              <p class="text-base font-bold text-foreground">No risk.</p>
+              <p class="text-sm text-foreground-muted mt-1">Messages encrypted. Data is yours. Nothing shared, scraped, or sold.</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <p class="mx-auto max-w-2xl text-center mt-[var(--space-stack-lg)] text-sm text-foreground-muted">
+        We tell you who to talk to. You decide what to say. Your account stays clean.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 9b. WHO THIS IS FOR                                               -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background-secondary border-y border-border py-[var(--space-section-sm)]">
+    <div class="mx-auto max-w-4xl px-6">
+      <div class="text-center mb-[var(--space-heading-gap)]">
+        <div class="text-foreground-muted mb-4 flex items-center justify-center gap-2 text-sm font-bold tracking-wide uppercase font-mono">
+          <Icon name="users" size="sm" />
+          <span>Built For</span>
+        </div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-balance text-foreground leading-[1.1]">
+          Built for closers. Not spammers.
+        </h2>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="flex items-start gap-3 text-sm">
+          <span class="text-lg shrink-0">🎓</span>
+          <span class="text-foreground-secondary">Coaches and consultants selling $2K+ offers via LinkedIn DMs</span>
+        </div>
+        <div class="flex items-start gap-3 text-sm">
+          <span class="text-lg shrink-0">🚀</span>
+          <span class="text-foreground-secondary">Founder-sellers managing 40-200+ active conversations</span>
+        </div>
+        <div class="flex items-start gap-3 text-sm">
+          <span class="text-lg shrink-0">🏢</span>
+          <span class="text-foreground-secondary">Agency owners closing deals one conversation at a time</span>
+        </div>
+        <div class="flex items-start gap-3 text-sm">
+          <span class="text-lg shrink-0">👥</span>
+          <span class="text-foreground-secondary">Small sales teams (1-5) who need pipeline visibility</span>
+        </div>
+      </div>
+
+      <p class="text-center text-xs text-foreground-muted mt-6">
+        Not for: SDR teams doing high-volume cold outbound, recruiters, or anyone who wants to automate LinkedIn messaging.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SP4. ROI / RESULTS PROOF — right before pricing                   -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background py-[var(--space-section-sm)]">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="grid gap-[var(--space-content-gap)] md:grid-cols-5 items-center">
+        <!-- Stats (3 cols) -->
+        <div class="md:col-span-3 grid grid-cols-3 gap-[var(--space-content-gap)] text-center">
+          <div>
+            <div class="font-display text-3xl md:text-4xl font-bold text-foreground">XX%</div>
+            <div class="text-xs text-foreground-muted mt-1">fewer ghosted conversations</div>
+          </div>
+          <div>
+            <div class="font-display text-3xl md:text-4xl font-bold text-foreground">X hrs</div>
+            <div class="text-xs text-foreground-muted mt-1">saved per week on pipeline management</div>
+          </div>
+          <div>
+            <div class="font-display text-3xl md:text-4xl font-bold text-foreground">X.X x</div>
+            <div class="text-xs text-foreground-muted mt-1">average ROI in first 30 days</div>
+          </div>
+        </div>
+        <!-- Quote (2 cols) -->
+        <div class="md:col-span-2">
+          <Card variant="outline" padding="lg">
+            <div class="flex flex-col gap-3">
+              <p class="text-sm text-foreground italic leading-relaxed">
+                "Lorem ipsum dolor sit amet. Paid for itself in the first week. Recovered a $12K deal I'd completely forgotten about."
+              </p>
+              <div class="flex items-center gap-3">
+                <div class="h-9 w-9 rounded-full bg-secondary border border-border shrink-0"></div>
+                <div>
+                  <p class="text-xs font-semibold text-foreground">First Last</p>
+                  <p class="text-[10px] text-foreground-muted">Title, $XX K/mo revenue</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 10. PRICING                                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="pricing" class="bg-background-secondary py-[var(--space-section-md)]">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mx-auto max-w-3xl text-center mb-[var(--space-heading-gap)]">
+        <div class="text-foreground-muted mb-4 flex items-center justify-center gap-2 text-sm font-bold tracking-wide uppercase font-mono">
+          <Icon name="tag" size="sm" />
+          <span>Simple Pricing</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance text-foreground leading-[1.1]">
+          One plan. Pays for itself by Tuesday.
+        </h2>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-foreground-secondary mb-[var(--space-section-gap)]">
+        <span class="flex items-center gap-2 text-sm">
+          <Icon name="check-circle" size="xs" class="text-success" />
+          Every feature. No tiers.
+        </span>
+        <span class="flex items-center gap-2 text-sm">
+          <Icon name="check-circle" size="xs" class="text-success" />
+          Cancel anytime. No contracts.
+        </span>
+        <span class="flex items-center gap-2 text-sm">
+          <Icon name="check-circle" size="xs" class="text-success" />
+          SevenFigureCreators.com community included.
+        </span>
+      </div>
+
+      <!-- CHANGE 8: Enhanced pricing cards with lime accents -->
+      <div class="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto items-start">
+
+        <!-- MONTHLY CARD -->
+        <div class="relative pt-5">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 z-10">
+            <span class="inline-block rounded-full border border-border bg-background px-4 py-1 text-[11px] font-medium uppercase tracking-wider font-mono text-foreground-muted">
+              Monthly
+            </span>
+          </div>
+          <div class="rounded-2xl border border-border bg-card p-8 pt-10 transition-shadow hover:shadow-lg">
+            <div class="text-center">
+              <p class="text-lg font-semibold text-foreground">LinkNinja</p>
+              <p class="mt-3">
+                <span class="text-5xl font-bold font-display tracking-tight text-foreground">$299</span>
+                <span class="text-lg text-foreground-muted">/month</span>
+              </p>
+              <p class="text-sm text-foreground-muted mt-2">Billed monthly. Cancel anytime.</p>
+            </div>
+
+            <div class="mt-8">
+              <Button variant="primary" size="lg" fullWidth data-open-dialog="playbook-dialog">
+                Start with the Free Playbook
+                <Icon name="arrow-right" size="sm" />
+              </Button>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-border">
+              <ul class="space-y-3">
+                {planFeatures.map((f) => (
+                  <li class="flex items-start gap-2.5 text-sm text-foreground-muted">
+                    <Icon name="check" size="xs" class="text-brand-300 shrink-0 mt-0.5" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ANNUAL CARD (Featured) -->
+        <div class="relative pt-5">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 z-10">
+            <span class="inline-block rounded-full border-2 border-brand-300 bg-foreground px-4 py-1 text-[11px] font-bold uppercase tracking-wider font-mono text-brand-300">
+              Best Value
+            </span>
+          </div>
+          <div class="pricing-card-annual rounded-2xl border-2 border-[rgba(206,241,123,0.3)] p-8 pt-10 shadow-xl relative overflow-hidden">
+            <!-- Subtle branded glow -->
+            <div class="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full bg-brand-300/8 blur-3xl" aria-hidden="true"></div>
+            <div class="relative">
+              <div class="text-center">
+                <p class="text-lg font-semibold text-white">LinkNinja</p>
+                <p class="mt-3">
+                  <span class="text-5xl font-bold font-display tracking-tight text-brand-300">$199</span>
+                  <span class="text-lg text-white/60">/month</span>
+                </p>
+                <p class="text-sm text-white/80 mt-2">
+                  Billed $2,388/year
+                  <Badge variant="brand" pill class="ml-2">Save $1,200</Badge>
+                </p>
+              </div>
+
+              <button
+                type="button"
+                data-open-dialog="playbook-dialog"
+                class="pricing-cta mt-8 flex h-14 w-full items-center justify-center gap-3 rounded-xl border-2 border-brand-300 bg-brand-300/10 text-brand-300 font-semibold transition-all hover:bg-brand-300 hover:text-black"
+              >
+                Start with the Free Playbook
+                <Icon name="arrow-right" size="sm" />
+              </button>
+
+              <div class="mt-8 pt-6 border-t border-white/10">
+                <ul class="space-y-3">
+                  {planFeatures.map((f) => (
+                    <li class="flex items-start gap-2.5 text-sm text-white/80">
+                      <Icon name="check" size="xs" class="text-brand-300 shrink-0 mt-0.5" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-foreground-muted mt-[var(--space-stack-lg)]">
+        Cancel anytime with one click. No contracts. No hidden fees. No "enterprise tier" upsells. If you don't close one extra deal in 30 days, you shouldn't keep paying.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 11. FAQ                                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="faq" class="bg-background py-[var(--space-section-md)]">
+    <div class="mx-auto max-w-3xl px-6">
+      <div class="text-center mb-[var(--space-section-gap)]">
+        <h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance text-foreground leading-[1.1]">
+          Before you ask
+        </h2>
+      </div>
+      <Accordion items={faqItems} variant="card" size="md" exclusive />
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SP5. VIDEO TESTIMONIAL — last-chance proof                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="bg-background border-y border-border py-[var(--space-section-sm)]">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <p class="text-xs font-mono uppercase tracking-wider text-foreground-muted mb-6">
+        See it in action
+      </p>
+      <!-- Video placeholder — replace with real video embed -->
+      <div class="relative aspect-video rounded-2xl bg-secondary border border-border overflow-hidden group cursor-pointer">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="flex h-16 w-16 items-center justify-center rounded-full bg-brand-300 text-[var(--gray-950)] shadow-lg group-hover:scale-110 transition-transform">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="9.5,7.5 16.5,12 9.5,16.5"></polygon></svg>
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+          <p class="text-sm font-semibold text-white">First Last — Title at Company</p>
+          <p class="text-xs text-white/70">"How LinkNinja helped me recover $XX K in ghosted deals"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 12. FINAL CTA                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <CTASection variant="invert" size="lg" id="final-cta">
+    <h2 slot="heading">The money's in your inbox.</h2>
+    <p slot="description">
+      Tomorrow morning you could wake up, open your daily brief, and know exactly who to message. Start with the free playbook.
+    </p>
+    <Fragment slot="actions">
+      <Button size="lg" data-open-dialog="playbook-dialog">
+        Get the Free Playbook
+        <Icon name="arrow-right" size="sm" />
+      </Button>
+    </Fragment>
+  </CTASection>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- DIALOG                                                            -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <Dialog id="playbook-dialog" title="Get the LinkedIn Sell-by-Chat Playbook" size="md">
+    <p class="text-sm text-foreground-muted mb-4">
+      14 pages of DM openers, follow-up sequences, and objection handlers from seven-figure closers. Free. We'll send it right over.
+    </p>
+    <LeadCaptureForm
+      client:load
+      formTags={formTags}
+      submitLabel="Send Me The Playbook"
+      termsHtml={termsHtml}
+    />
+  </Dialog>
+
+  <!-- FLOATING CTA BAR -->
+  <div class="floating-cta" id="floating-cta">
+    <div class="container flex items-center justify-center gap-6">
+      <p class="hidden md:block text-sm text-foreground-muted mb-0">
+        How many deals slipped away this week?
+      </p>
+      <Button variant="primary" size="lg" data-open-dialog="playbook-dialog" class="whitespace-nowrap w-full md:w-auto text-center">
+        Get Free Playbook
+      </Button>
+    </div>
+  </div>
+
+  <Footer slot="footer" layout="simple" background="secondary" showCopyright={false} />
+</BaseLayout>
+
+<style>
+  /* ── CHANGE 6: LinkedIn mockup animations ── */
+  .dm-pulse {
+    animation: dmPulse 3s ease-in-out infinite;
+  }
+  @keyframes dmPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ── CHANGE 2b: Playbook CTA lime gradient ── */
+  .playbook-gradient {
+    background-image: radial-gradient(ellipse 60% 50% at 50% 40%, oklch(from var(--brand-300) l c h / 0.07) 0%, transparent 70%);
+  }
+
+  /* ── Pricing card (annual) — dark bg with lime gradient ── */
+  .pricing-card-annual {
+    background:
+      radial-gradient(ellipse 80% 60% at 85% 20%, rgba(206, 241, 123, 0.12) 0%, transparent 70%),
+      linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  }
+
+  .pricing-cta {
+    box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Floating CTA bar ── */
+  .floating-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1rem 0;
+    background: oklch(from var(--background) l c h / 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    transform: translateY(150%);
+    transition: transform 0.3s ease;
+  }
+
+  .floating-cta.visible {
+    transform: translateY(0);
+  }
+
+  /* ── Mobile dialog full-screen ── */
+  @media (max-width: 640px) {
+    :global(#playbook-dialog [data-dialog-panel]) {
+      max-width: 100% !important;
+      border-radius: 0;
+      min-height: 100vh;
+      max-height: none;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    :global(#playbook-dialog) input,
+    :global(#playbook-dialog) textarea,
+    :global(#playbook-dialog) select {
+      font-size: 16px !important;
+    }
+  }
+</style>
+
+<script>
+  // Dialog triggers
+  document.querySelectorAll('[data-open-dialog]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = el.getAttribute('data-open-dialog');
+      if (id && (window as any).openDialog) (window as any).openDialog(id);
+    });
+  });
+
+  // Floating CTA scroll logic
+  const floatingCta = document.getElementById('floating-cta');
+  if (floatingCta) {
+    const showThreshold = window.innerWidth < 768 ? 450 : 768;
+    let visible = false;
+
+    function update() {
+      const scrollY = window.scrollY;
+      const finalCta = document.getElementById('final-cta');
+      const docHeight = document.documentElement.scrollHeight;
+      const viewportHeight = window.innerHeight;
+      const nearBottom = scrollY + viewportHeight > docHeight - 200;
+
+      let hideNearFinalCta = false;
+      if (finalCta) {
+        const rect = finalCta.getBoundingClientRect();
+        hideNearFinalCta = rect.top < viewportHeight + 200;
+      }
+
+      if (scrollY > showThreshold && !nearBottom && !hideNearFinalCta) {
+        if (!visible) { floatingCta.classList.add('visible'); visible = true; }
+      } else {
+        if (visible) { floatingCta.classList.remove('visible'); visible = false; }
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

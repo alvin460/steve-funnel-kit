@@ -1,0 +1,379 @@
+---
+import LeadLayout from '@/layouts/LeadLayout.astro';
+import LeadCaptureForm from '../components/forms/LeadCaptureForm.tsx';
+import Button from '@/components/ui/form/Button/Button.astro';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+import Dialog from '@/components/ui/overlay/Dialog/Dialog.astro';
+import { Hero } from '@/components/hero';
+
+const formTags = ['linkninja_lead', 'dm_workshop'];
+
+const termsHtml = `<p>By providing my information, I agree to receive communications from LinkNinja and accept the <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>`;
+
+const perfectFor = [
+  'B2B service providers ready to scale outreach',
+  'Consultants who want predictable pipeline',
+  'Coaches selling high-ticket programs',
+  'Agency owners tired of referral dependency',
+  'Anyone selling $5K+ offers who needs qualified conversations',
+];
+
+const notFor = [
+  'Spam artists looking for volume tricks',
+  'Low-ticket product sellers',
+  "People who won't personalize messages",
+  'Anyone allergic to follow-up',
+];
+---
+
+<LeadLayout
+  title="Master LinkedIn DMs Workshop"
+  description="Learn the complete DM system that converts cold outreach into warm conversations. AI-powered templates, pipeline automation, and sequences that get 40%+ reply rates."
+>
+  <!-- Hero -->
+  <Hero layout="centered" size="md" showGrid>
+    <Badge slot="badge" variant="brand" pill>
+      <Icon name="zap" size="xs" />
+      Online Workshop &bull; Free &bull; Limited Spots
+    </Badge>
+
+    <h1 slot="title">The &ldquo;Master LinkedIn DMs&rdquo; Workshop</h1>
+
+    <p slot="description">
+      Turn cold DMs into warm conversations with a complete system&mdash;automated
+      pipelines, smart templates, and sequences that actually get replies.
+    </p>
+
+    <div slot="actions">
+      <Button size="lg" data-open-dialog="workshop-dialog">Register for Free</Button>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-foreground-muted mt-5">
+      <span class="flex items-center gap-1.5">
+        <Icon name="check-circle" size="xs" class="text-brand-300" />
+        With LinkNinja
+      </span>
+      <span class="flex items-center gap-1.5">
+        <Icon name="check-circle" size="xs" class="text-brand-300" />
+        90 Minutes
+      </span>
+      <span class="flex items-center gap-1.5">
+        <Icon name="check-circle" size="xs" class="text-brand-300" />
+        Online via Zoom
+      </span>
+    </div>
+  </Hero>
+
+  <!-- Editorial Content -->
+  <section class="py-[var(--space-section-md)] bg-background">
+    <div class="mx-auto max-w-3xl px-6">
+
+      <!-- Lead paragraph -->
+      <div class="border-l-4 border-brand-300 pl-6 my-8">
+        <p class="text-xl font-semibold text-foreground leading-relaxed">
+          Your DMs are getting ignored because you're doing what everyone else does.
+        </p>
+        <p class="text-foreground-muted mt-2">We built a system that actually gets replies.</p>
+      </div>
+
+      <!-- Prose block 1 -->
+      <div class="prose max-w-none">
+        <p>Here's the reality check:</p>
+
+        <p>You're sending generic "Hey, I saw your post" messages. You're pitching on the first message. You're using templates that scream "mass outreach."</p>
+
+        <p>Meanwhile, our users are getting <strong>40%+ reply rates</strong> on cold DMs.</p>
+
+        <p>How? An automated DM pipeline that sends the right message, to the right person, at the right time. LinkNinja manages all your LinkedIn conversations from one inbox, syncs with your CRM, and runs follow-up sequences on autopilot.</p>
+
+        <p>This workshop isn't about sending more DMs. It's about sending <strong>the right DMs</strong> to the right people with the right message.</p>
+
+        <p>We're talking conversion rates that make cold email look prehistoric.</p>
+
+        <p><strong>Automated. Data-driven. Human-feeling. Zero spam vibes.</strong></p>
+
+        <p>The best part? LinkedIn DMs have a 3x higher open rate than email. Decision makers actually check them. And when you do it right, they actually reply.</p>
+
+        <p>That's what we're teaching.</p>
+
+        <h2>Why This System Works</h2>
+
+        <p>Because we tested everything.</p>
+
+        <blockquote>
+          LinkNinja's pipeline engine is built on data from millions of outreach conversations. Not theory. Real messages that started real conversations that closed real deals.
+        </blockquote>
+
+        <ul>
+          <li>40%+ reply rates on cold outreach (industry average is 8%)</li>
+          <li>15-20% booking rates from replies</li>
+          <li>Users closing $10K-$50K deals from DM conversations</li>
+          <li>Zero ad spend, just strategic outreach</li>
+        </ul>
+
+        <p>We turned DMs from a numbers game into a conversion machine.</p>
+
+        <p><strong>Small group. Fast implementation. Real conversations.</strong></p>
+
+        <h2>What We'll Actually Do (In 90 Minutes)</h2>
+
+        <p>No fluff. No theory. Just hands-on work building your DM system.</p>
+
+        <p>Here's exactly what happens:</p>
+
+        <p><strong>First 20 minutes: The DM Reality Check</strong></p>
+        <ul>
+          <li>Why 95% of LinkedIn DMs get ignored (and how to be in the 5%)</li>
+          <li>The psychology behind messages that get replies</li>
+          <li>What high-ticket buyers actually want to hear</li>
+        </ul>
+
+        <p><strong>Next 25 minutes: Building Your Pipeline</strong></p>
+        <ul>
+          <li>Setting up your DM pipeline in LinkNinja</li>
+          <li>Finding your ideal clients with strategic targeting</li>
+          <li>Building lists that convert, not just contact databases</li>
+        </ul>
+
+        <p><strong>Next 25 minutes: Message Sequences That Convert</strong></p>
+        <ul>
+          <li>Writing DMs that sound like you (but better)</li>
+          <li>The 4-message sequence that books calls</li>
+          <li>Personalization at scale without sounding robotic</li>
+        </ul>
+
+        <p><strong>Next 15 minutes: Launch Your First Campaign</strong></p>
+        <ul>
+          <li>Pick your target audience</li>
+          <li>Write your first sequence with proven templates</li>
+          <li>Set up automation triggers and safety limits</li>
+          <li>Leave with everything ready to launch</li>
+        </ul>
+
+        <p><strong>Final 5 minutes: Scale &amp; Optimize</strong></p>
+        <ul>
+          <li>Managing replies from the unified inbox</li>
+          <li>Tracking what works and doubling down</li>
+          <li>Your 30-day implementation roadmap</li>
+        </ul>
+
+        <h2>What Happens Next</h2>
+
+        <p><strong>Before:</strong> Quick form to understand your business and target market. We customize examples for your industry.</p>
+
+        <p><strong>During:</strong> 90 minutes of pure tactical training. Screen sharing, live examples, real sequences.</p>
+
+        <p><strong>After:</strong> You get the recording, DM templates, pipeline setup guide, and a free LinkNinja trial. Plus an invite to explore working together if you want to scale faster.</p>
+
+        <h2>Who This Is For</h2>
+
+        <p><strong>Perfect for:</strong></p>
+      </div>
+
+      <!-- Checklist: Perfect for -->
+      <ul class="space-y-3 my-6 text-foreground-secondary">
+        {perfectFor.map(item => (
+          <li class="flex items-start gap-3">
+            <Icon name="check" size="sm" class="text-brand-300 mt-0.5 shrink-0" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="prose max-w-none">
+        <p><strong>Not for:</strong></p>
+      </div>
+
+      <!-- Checklist: Not for -->
+      <ul class="space-y-3 my-6 text-foreground-secondary">
+        {notFor.map(item => (
+          <li class="flex items-start gap-3">
+            <Icon name="x" size="sm" class="text-[var(--error)] mt-0.5 shrink-0" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Prose block 2 -->
+      <div class="prose max-w-none">
+        <p>If you sell something valuable and want conversations with people who can buy it, you're in the right place.</p>
+
+        <p><strong>This is for builders who want to fill their calendar with qualified prospects.</strong></p>
+
+        <h2>Why Our Approach Is Different</h2>
+
+        <ul>
+          <li>Automated pipeline that runs your outreach on autopilot</li>
+          <li>Templates that get 40%+ reply rates consistently</li>
+          <li>Unified inbox to manage every LinkedIn conversation</li>
+          <li>CRM sync so nothing falls through the cracks</li>
+          <li>Sequences that feel personal even at 50+ DMs per day</li>
+        </ul>
+
+        <p>When everyone's sending generic outreach, LinkNinja helps you cut through with messages that feel human, relevant, and timely.</p>
+
+        <h2>What You Walk Away With</h2>
+
+        <p>Everyone who attends gets:</p>
+
+        <ul>
+          <li>Our 4-message DM sequence templates (the ones getting 40% replies)</li>
+          <li>Pipeline configuration guide for your specific offer</li>
+          <li>Targeting strategies for your ideal clients</li>
+          <li>Reply handling scripts that book calls</li>
+          <li>30-day implementation calendar</li>
+          <li>Recording to review and refine</li>
+        </ul>
+
+        <h2>Workshop Details</h2>
+      </div>
+
+      <!-- Info box as Card -->
+      <Card class="my-8" padding="lg">
+        <div class="space-y-3 text-foreground [&>p]:mb-0">
+          <p><strong>Format:</strong> Online via Zoom (link sent after registration)</p>
+          <p><strong>Duration:</strong> 90 minutes of hands-on training</p>
+          <p><strong>Investment:</strong> <strong>Free</strong> — limited spots per session</p>
+          <p><strong>Schedule:</strong> Dates announced via email after registration. We run small group sessions regularly.</p>
+        </div>
+      </Card>
+
+      <!-- Prose block 3 -->
+      <div class="prose max-w-none">
+        <h2>The Bottom Line</h2>
+
+        <p>You can keep sending DMs that get ignored. Keep hoping someone eventually replies.</p>
+
+        <p>Or you can learn the system that's turning cold outreach into warm conversations at scale.</p>
+
+        <p>No spam. No scripts that sound like robots. No praying for replies.</p>
+
+        <p>Just a proven system for starting conversations with people who actually want what you sell.</p>
+
+        <p><strong>90 minutes. Small groups. Real results.</strong></p>
+
+        <p>Master the system. Start conversations. Close deals.</p>
+      </div>
+
+      <!-- Final CTA -->
+      <div class="final-cta text-center border-t border-border pt-10 mt-12">
+        <p class="text-2xl font-bold text-foreground font-display tracking-tight">Stop Spraying. Start Converting.</p>
+        <p class="text-lg text-foreground-muted mt-2">Free workshop. Limited spots. Register now.</p>
+        <div class="mt-6">
+          <Button size="lg" data-open-dialog="workshop-dialog">Register for Free</Button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Registration Dialog -->
+  <Dialog id="workshop-dialog" title="Register for the Workshop" size="md">
+    <LeadCaptureForm
+      client:load
+      formTags={formTags}
+      submitLabel="Register Free"
+      termsHtml={termsHtml}
+    />
+  </Dialog>
+
+  <!-- Floating CTA Bar -->
+  <div class="floating-cta" id="floating-cta">
+    <div class="container flex items-center justify-center gap-6">
+      <p class="hidden md:block text-sm text-foreground-muted mb-0">
+        90 min &bull; Online &bull; No cost
+      </p>
+      <Button variant="primary" size="lg" data-open-dialog="workshop-dialog" class="whitespace-nowrap w-full md:w-auto text-center">
+        Register for Free
+      </Button>
+    </div>
+  </div>
+</LeadLayout>
+
+<style>
+  /* Floating CTA — translucent backdrop */
+  .floating-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1rem 0;
+    background: oklch(from var(--background) l c h / 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    transform: translateY(150%);
+    transition: transform 0.3s ease;
+  }
+
+  .floating-cta.visible {
+    transform: translateY(0);
+  }
+
+  /* Mobile dialog: full-screen + iOS scroll locking */
+  @media (max-width: 640px) {
+    :global(#workshop-dialog [data-dialog-panel]) {
+      max-width: 100% !important;
+      border-radius: 0;
+      min-height: 100vh;
+      max-height: none;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    :global(#workshop-dialog) input,
+    :global(#workshop-dialog) textarea,
+    :global(#workshop-dialog) select {
+      font-size: 16px !important;
+    }
+  }
+</style>
+
+<script>
+  // Connect dialog triggers
+  document.querySelectorAll('[data-open-dialog]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = el.getAttribute('data-open-dialog');
+      if (id && (window as any).openDialog) (window as any).openDialog(id);
+    });
+  });
+
+  // Floating CTA scroll logic
+  const floatingCta = document.getElementById('floating-cta');
+  if (floatingCta) {
+    const showThreshold = window.innerWidth < 768 ? 450 : 768;
+    let visible = false;
+
+    function update() {
+      const scrollY = window.scrollY;
+      const finalCta = document.querySelector('.final-cta');
+      const docHeight = document.documentElement.scrollHeight;
+      const viewportHeight = window.innerHeight;
+      const nearBottom = scrollY + viewportHeight > docHeight - 200;
+
+      let hideNearFinalCta = false;
+      if (finalCta) {
+        const rect = finalCta.getBoundingClientRect();
+        hideNearFinalCta = rect.top < viewportHeight + 200;
+      }
+
+      if (scrollY > showThreshold && !nearBottom && !hideNearFinalCta) {
+        if (!visible) {
+          floatingCta.classList.add('visible');
+          visible = true;
+        }
+      } else {
+        if (visible) {
+          floatingCta.classList.remove('visible');
+          visible = false;
+        }
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>

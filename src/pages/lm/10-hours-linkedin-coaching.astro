@@ -1,0 +1,102 @@
+---
+import LeadLayout from '@/layouts/LeadLayout.astro';
+import LeadCaptureForm from '@/components/forms/LeadCaptureForm.tsx';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+
+const formTags = ['linkninja_lead', 'lm_10hrs_coaching'];
+
+const benefits = [
+  'Build an automated DM pipeline that books calls',
+  'Write messages that get 40%+ reply rates',
+  'Manage all LinkedIn conversations from one inbox',
+];
+
+const termsHtml = `<p>By providing my information, I agree to receive communications and accept the <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>`;
+---
+
+<LeadLayout
+  title="10 Hours of LinkedIn Coaching"
+  description="Master LinkedIn outreach with 10 hours of live coaching. Build your DM pipeline, manage conversations, and grow your network."
+>
+  <section class="lm-hero relative overflow-hidden">
+    <div
+      class="bg-grid-pattern pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-40"
+      aria-hidden="true"
+    />
+
+    <div class="mx-auto max-w-6xl px-6 relative z-10 py-6 md:py-0">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[var(--space-section-gap)] items-center">
+
+        {/* Left Column: Cover Image + Benefits */}
+        <div class="hidden lg:block">
+          <Card padding="none" class="overflow-hidden">
+            <div class="flex flex-col items-center justify-center gap-2 aspect-video bg-secondary">
+              <Icon name="monitor" size="xl" class="text-foreground-subtle opacity-40" />
+              <span class="text-sm font-medium text-foreground-muted">Training Preview</span>
+            </div>
+          </Card>
+          <div class="mt-[var(--space-heading-gap)]">
+            <h3 class="text-base font-bold text-foreground">Reasons to opt in</h3>
+            <ul class="mt-4 space-y-3">
+              {benefits.map((item) => (
+                <li class="flex gap-3 items-start text-foreground-secondary text-sm">
+                  <Icon name="check-circle" size="sm" class="text-brand-500 mt-0.5 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Right Column: Badge + Heading + Description + Form */}
+        <div>
+          <Badge variant="brand" pill>
+            <Icon name="zap" size="xs" />
+            Free Training
+          </Badge>
+
+          <h1 class="mt-3 font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground leading-tight">
+            10 Hours of LIVE LinkedIn Coaching.
+            <span class="block">Build Your Pipeline.</span>
+          </h1>
+
+          <p class="mt-2 text-base leading-relaxed text-foreground-muted">
+            Learn the exact system top professionals use to generate leads, book meetings,
+            and close deals through LinkedIn outreach.
+          </p>
+
+          {/* Mobile image */}
+          <div class="mt-4 lg:hidden">
+            <Card padding="none" class="overflow-hidden">
+              <div class="flex flex-col items-center justify-center gap-2 aspect-video bg-secondary">
+                <Icon name="monitor" size="xl" class="text-foreground-subtle opacity-40" />
+                <span class="text-sm font-medium text-foreground-muted">Training Preview</span>
+              </div>
+            </Card>
+          </div>
+
+          <LeadCaptureForm
+            client:load
+            formTags={formTags}
+            submitLabel="Reserve My Spot"
+            termsHtml={termsHtml}
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+</LeadLayout>
+
+<style>
+  .lm-hero {
+    padding-top: calc(var(--space-page-top-sm) + 32px);
+  }
+  @media (min-width: 1024px) {
+    .lm-hero {
+      padding-top: calc(var(--space-page-top-sm) + 64px);
+    }
+  }
+</style>

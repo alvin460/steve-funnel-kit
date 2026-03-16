@@ -1,0 +1,65 @@
+/* =============================================================================
+   Velocity Design Tokens - Primitive Colors
+   =============================================================================
+   Raw color scales that themes build upon.
+   Using OKLCH for perceptual color uniformity.
+   ============================================================================= */
+
+:root {
+  /* -------------------------------------------------------------------------
+     Grayscale - Zinc-tinted for premium warmth (OKLCH, hue 265)
+     Subtle blue undertone adds sophistication vs pure neutral gray.
+     ------------------------------------------------------------------------- */
+  --gray-0: oklch(100% 0 0);
+  --gray-50: oklch(98.3% 0.004 265);
+  --gray-100: oklch(96.5% 0.006 265);
+  --gray-200: oklch(91.3% 0.008 265);
+  --gray-300: oklch(85.8% 0.010 265);
+  --gray-400: oklch(64% 0.012 265);
+  --gray-500: oklch(52% 0.012 265);
+  --gray-600: oklch(38% 0.014 265);
+  --gray-700: oklch(32% 0.014 265);
+  --gray-800: oklch(23% 0.016 265);
+  --gray-900: oklch(17% 0.016 265);
+  --gray-950: oklch(13% 0.016 265);
+
+  /* -------------------------------------------------------------------------
+     Brand Emerald Scale
+     Inspired by Supabase green, tuned slightly cooler (hue 162) for
+     a modern AI/tech feel. Works on both light and dark backgrounds.
+     brand-300 ≈ bright emerald for glows & dark-bg accents
+     brand-500 = primary, WCAG AA readable on white
+     ------------------------------------------------------------------------- */
+  --brand-50: oklch(97% 0.02 162);
+  --brand-100: oklch(94% 0.04 162);
+  --brand-200: oklch(89% 0.08 162);
+  --brand-300: oklch(82% 0.13 162);
+  --brand-400: oklch(75% 0.16 162);
+  --brand-500: oklch(64% 0.17 162);
+  --brand-600: oklch(54% 0.15 162);
+  --brand-700: oklch(45% 0.12 162);
+  --brand-800: oklch(35% 0.10 162);
+  --brand-900: oklch(25% 0.06 162);
+
+  /* Accent - Amber for secondary highlights / urgency */
+  --orange-500: oklch(75% 0.18 75);
+  --orange-600: oklch(68% 0.16 75);
+
+  /* Accent - Blue for links/focus */
+  --blue-500: oklch(59.5% 0.19 260);
+  --blue-600: oklch(53.2% 0.19 260);
+
+  /* Status Colors - OKLCH for consistent perception */
+  --success: oklch(50% 0.15 145);
+  --success-light: oklch(94% 0.05 145);
+  --success-foreground: oklch(35% 0.15 145);
+  --warning: oklch(79.5% 0.18 85);
+  --warning-light: oklch(96% 0.05 85);
+  --warning-foreground: oklch(40% 0.12 85);
+  --error: oklch(52% 0.20 25);
+  --error-light: oklch(94% 0.05 25);
+  --error-foreground: oklch(40% 0.18 25);
+  --info: oklch(59.5% 0.19 260);
+  --info-light: oklch(94% 0.05 260);
+  --info-foreground: oklch(40% 0.15 260);
+}

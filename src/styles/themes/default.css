@@ -1,0 +1,207 @@
+/* =============================================================================
+   Velocity Theme - Foundation
+   =============================================================================
+   A premium, brand-neutral base theme designed for funnel and landing page
+   boilerplates. Clean enough to be a blank canvas, sophisticated enough to
+   feel like OpenAI or Perplexity out of the box.
+
+   Font pair: Plus Jakarta Sans (display + body) + JetBrains Mono
+   Neutrals: Zinc-tinted grays with emerald brand accent
+   Aesthetic: Modern AI — generous space, subtle depth, confident typography
+
+   Theme Contract: Every theme must define the same set of semantic tokens.
+   Swap this file with another theme to change the entire look.
+   ============================================================================= */
+
+:root {
+  /* -------------------------------------------------------------------------
+     Semantic Tokens - Light Mode
+     ------------------------------------------------------------------------- */
+  --background: var(--gray-0);
+  --background-secondary: var(--gray-50);
+  --background-tertiary: var(--gray-100);
+  --background-elevated: var(--gray-0);
+
+  --foreground: var(--gray-950);
+  --foreground-secondary: var(--gray-700);
+  --foreground-muted: var(--gray-600);
+  --foreground-subtle: var(--gray-500);
+
+  --border: var(--gray-200);
+  --border-strong: var(--gray-300);
+  --border-subtle: var(--gray-100);
+
+  --primary: var(--gray-950);
+  --primary-hover: var(--gray-900);
+  --primary-foreground: var(--gray-0);
+
+  --secondary: var(--gray-100);
+  --secondary-hover: var(--gray-200);
+  --secondary-foreground: var(--gray-900);
+
+  --accent: var(--gray-900);
+  --accent-hover: var(--gray-950);
+  --accent-light: var(--gray-100);
+
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-500);
+
+  --card: var(--gray-0);
+  --card-border: var(--gray-200);
+
+  --input-bg: var(--gray-0);
+  --input-border: var(--gray-300);
+  --input-focus: var(--gray-900);
+
+  --ring: var(--gray-900);
+
+  /* Destructive */
+  --destructive: var(--error);
+  --destructive-foreground: var(--gray-0);
+
+  /* Gradient colors - OKLCH */
+  --gradient-start: oklch(96.5% 0.004 265);
+  --gradient-end: oklch(100% 0 0);
+
+  /* -------------------------------------------------------------------------
+     Inverted/Contrast Section
+     ------------------------------------------------------------------------- */
+  --surface-invert: var(--gray-950);
+  --surface-invert-secondary: var(--gray-900);
+  --surface-invert-tertiary: var(--gray-800);
+  --on-invert: var(--gray-50);
+  --on-invert-secondary: var(--gray-200);
+  --on-invert-muted: var(--gray-300);
+  --border-invert: var(--gray-800);
+  --border-invert-strong: var(--gray-700);
+
+  /* -------------------------------------------------------------------------
+     Typography — Plus Jakarta Sans + JetBrains Mono
+     Plus Jakarta: geometric warmth, premium feel, great weight range.
+     JetBrains Mono: crisp monospace for prices, labels, code.
+     ------------------------------------------------------------------------- */
+  --theme-font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --theme-font-display: var(--theme-font-sans);
+  --theme-font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace,
+    SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --theme-heading-weight: 700;
+  --theme-heading-tracking: -0.03em;
+  --theme-body-weight: 400;
+  --theme-body-leading: 1.6;
+
+  /* -------------------------------------------------------------------------
+     Shadows — soft, layered, subtle zinc tint
+     ------------------------------------------------------------------------- */
+  --theme-shadow-sm: 0 1px 2px -1px oklch(13% 0.016 265 / 0.08),
+    0 1px 3px oklch(13% 0.016 265 / 0.06);
+  --theme-shadow-md: 0 4px 8px oklch(13% 0.016 265 / 0.08),
+    0 2px 4px oklch(13% 0.016 265 / 0.04);
+  --theme-shadow-lg: 0 10px 24px -4px oklch(13% 0.016 265 / 0.10),
+    0 4px 8px -4px oklch(13% 0.016 265 / 0.06);
+  --theme-shadow-xl: 0 24px 48px oklch(13% 0.016 265 / 0.12),
+    0 0 1px oklch(13% 0.016 265 / 0.04);
+
+  /* Nav bar shadow */
+  --theme-shadow-nav: 0 0 2px oklch(13% 0.016 265 / 0.03),
+    0 2px 8px oklch(13% 0.016 265 / 0.06);
+
+  /* Button glow — emerald accent */
+  --theme-shadow-button-glow: 0 4px 14px oklch(75% 0.16 162 / 0.25),
+    0 0 0 1px oklch(75% 0.16 162 / 0.08);
+
+  /* Inner highlight */
+  --theme-shadow-inner: inset 0 2px 0 rgba(255, 255, 255, 0.12);
+
+  /* -------------------------------------------------------------------------
+     Border Radii — slightly more rounded for modern feel
+     ------------------------------------------------------------------------- */
+  --theme-radius-sm: 0.375rem;   /* 6px */
+  --theme-radius-md: 0.5rem;     /* 8px */
+  --theme-radius-lg: 0.75rem;    /* 12px */
+  --theme-radius-xl: 1rem;       /* 16px */
+  --theme-radius-2xl: 1.5rem;    /* 24px */
+  --theme-radius-full: 9999px;
+}
+
+/* -------------------------------------------------------------------------
+   Dark Mode
+   ------------------------------------------------------------------------- */
+.dark {
+  --background: var(--gray-950);
+  --background-secondary: var(--gray-900);
+  --background-tertiary: var(--gray-800);
+  --background-elevated: var(--gray-900);
+
+  --foreground: var(--gray-50);
+  --foreground-secondary: var(--gray-300);
+  --foreground-muted: var(--gray-400);
+  --foreground-subtle: oklch(58% 0.010 265);
+
+  --border: var(--gray-800);
+  --border-strong: var(--gray-700);
+  --border-subtle: var(--gray-900);
+
+  --primary: var(--gray-0);
+  --primary-hover: var(--gray-200);
+  --primary-foreground: var(--gray-900);
+
+  --secondary: var(--gray-800);
+  --secondary-hover: var(--gray-700);
+  --secondary-foreground: var(--gray-100);
+
+  --muted: var(--gray-800);
+  --muted-foreground: var(--gray-400);
+
+  --card: var(--gray-900);
+  --card-border: var(--gray-800);
+
+  --input-bg: var(--gray-900);
+  --input-border: var(--gray-700);
+  --input-focus: var(--gray-0);
+
+  --ring: var(--gray-0);
+
+  --accent: var(--gray-50);
+  --accent-hover: var(--gray-200);
+  --accent-light: var(--gray-800);
+
+  --destructive: oklch(65% 0.22 25);
+  --destructive-foreground: var(--gray-0);
+
+  /* Gradient colors */
+  --gradient-start: oklch(13% 0.016 265);
+  --gradient-end: oklch(17% 0.016 265);
+
+  /* Status */
+  --success-light: oklch(20% 0.05 145);
+  --warning-light: oklch(20% 0.05 85);
+  --error-light: oklch(20% 0.05 25);
+
+  /* Inverted section in dark mode */
+  --surface-invert: var(--gray-900);
+  --surface-invert-secondary: var(--gray-800);
+  --surface-invert-tertiary: var(--gray-700);
+  --on-invert: var(--gray-50);
+  --on-invert-secondary: var(--gray-300);
+  --on-invert-muted: var(--gray-400);
+  --border-invert: var(--gray-700);
+  --border-invert-strong: var(--gray-600);
+
+  /* Dark mode shadows */
+  --theme-shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.25);
+  --theme-shadow-md: 0 4px 8px oklch(0% 0 0 / 0.3),
+    0 0 1px oklch(0% 0 0 / 0.1);
+  --theme-shadow-lg: 0 10px 24px -4px oklch(0% 0 0 / 0.35),
+    0 4px 8px -4px oklch(0% 0 0 / 0.15);
+  --theme-shadow-xl: 0 24px 48px oklch(0% 0 0 / 0.4),
+    0 0 1px oklch(0% 0 0 / 0.1);
+  --theme-shadow-nav: 0 0 2px oklch(0% 0 0 / 0.12),
+    0 2px 8px oklch(0% 0 0 / 0.2);
+  --theme-shadow-button-glow: 0 4px 14px oklch(75% 0.16 162 / 0.20),
+    0 0 0 1px oklch(75% 0.16 162 / 0.06);
+  --theme-shadow-inner: inset 0 2px 0 rgba(255, 255, 255, 0.06);
+}

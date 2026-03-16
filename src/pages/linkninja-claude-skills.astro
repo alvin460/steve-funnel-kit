@@ -1,0 +1,258 @@
+---
+import '@/styles/global.css';
+import SEO from '@/components/seo/SEO.astro';
+import siteConfig from '@/config/site.config';
+import Dialog from '@/components/ui/overlay/Dialog/Dialog.astro';
+import LeadCaptureForm from '../components/forms/LeadCaptureForm.tsx';
+
+const formTags = ['linkninja_skills', 'claude_code_skills'];
+const termsHtml = `<p>By providing my information, I agree to receive communications from LinkNinja and accept the <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>`;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={siteConfig.branding.favicon.svg} />
+    <meta name="theme-color" content="#0a0a0a" />
+    <SEO
+      title="LinkNinja Skills for Claude Code"
+      description="Claude Code skills for LinkedIn DM pipeline management, ghost recovery, conversation classification, CRM sync, and AI-powered follow-ups. Built for LinkNinja."
+      noindex={true}
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" />
+  </head>
+
+  <body class="sk-body relative flex min-h-screen flex-col items-center justify-start overflow-hidden pt-[6vh] pb-[5rem] sm:pt-[10vh] sm:pb-[5.5rem] lg:pt-[14vh]">
+    <!-- Decorative logomark watermark -->
+    <div
+      class="pointer-events-none absolute -top-24 right-[-4rem] hidden h-[36rem] w-[36rem] opacity-[0.04] md:block lg:-top-32 lg:right-8 lg:h-[44rem] lg:w-[44rem]"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 400 400" fill="currentColor" class="h-full w-full">
+        <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z"/>
+        <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z"/>
+      </svg>
+    </div>
+
+    <main class="relative z-10 flex w-full max-w-2xl flex-col items-center gap-5 px-5 text-center sm:gap-8 sm:px-6 lg:gap-10">
+
+      <!-- Badge -->
+      <span
+        class="flex items-center gap-2 border-2 border-current px-3 py-1.5 text-xs font-bold uppercase tracking-wider sm:px-4 sm:py-2 sm:text-sm"
+      >
+        <svg viewBox="0 0 400 400" fill="currentColor" class="h-4 w-4">
+          <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z"/>
+          <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z"/>
+        </svg>
+        20+ skills for Claude Code
+      </span>
+
+      <!-- Headline + Description -->
+      <div class="flex flex-col items-center gap-4 sm:gap-6">
+        <h1 class="sk-headline text-[clamp(1.75rem,6vw,3rem)] font-bold uppercase leading-[1.1] tracking-tight">
+          LinkNinja Skills<br />
+          <span class="text-[#CEF17B]">for Claude Code</span>
+        </h1>
+        <p class="max-w-lg text-sm leading-relaxed text-[#888] sm:text-base">
+          Manage your LinkedIn DM pipeline with AI — ghost recovery, conversation scoring, warmth tracking, CRM sync, and smart follow-ups.
+        </p>
+      </div>
+
+      <!-- Terminal command -->
+      <div class="flex w-full max-w-xl flex-col gap-2 sm:gap-3">
+        <div class="border border-[#333]">
+          <!-- Terminal header -->
+          <div class="flex items-center justify-between gap-2 border-b border-[#333] bg-[#1a1a1a] px-4 py-2 text-[#aaa]">
+            <span class="text-xs font-bold uppercase tracking-widest">Terminal</span>
+            <button
+              type="button"
+              data-open-dialog="skills-access-dialog"
+              class="flex cursor-pointer items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors hover:text-[#CEF17B]"
+              aria-label="Unlock"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Unlock
+            </button>
+          </div>
+          <!-- Command area -->
+          <button
+            type="button"
+            data-open-dialog="skills-access-dialog"
+            class="w-full cursor-pointer bg-black p-3 text-left font-mono text-[10px] transition-colors hover:bg-[#0d0d0d] sm:p-6 sm:text-sm"
+          >
+            <span class="text-[#CEF17B]">$</span>
+            <span class="ml-2 whitespace-nowrap text-[#CEF17B]">npx skills add <span class="sk-blur select-none">██████████</span>/linkninja</span>
+          </button>
+        </div>
+        <p class="text-xs uppercase tracking-wider text-[#888]">
+          Enter your details to unlock the full install command
+        </p>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+        <button
+          type="button"
+          data-open-dialog="skills-access-dialog"
+          class="sk-btn-green flex w-full items-center justify-center gap-2 sm:w-auto"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+          Request Access
+        </button>
+        <a
+          href="/"
+          class="sk-btn-muted flex w-full items-center justify-center gap-2 sm:w-auto"
+        >
+          <svg viewBox="0 0 400 400" fill="currentColor" class="h-4 w-4">
+            <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z"/>
+            <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z"/>
+          </svg>
+          LinkNinja Home
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Attribution (pinned to bottom) -->
+    <footer class="absolute bottom-3 left-0 right-0 z-10 flex flex-col items-center gap-0.5 px-4 text-center text-xs text-[#888] sm:bottom-6 sm:gap-1 sm:text-sm">
+      <div class="flex items-center gap-2 font-bold uppercase tracking-wider">
+        <span>Built by</span>
+        <a
+          href="https://www.linkedin.com/in/stvbutlr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 transition-colors hover:text-[#CEF17B] sm:gap-2"
+        >
+          <img src="/images/steve-b.jpg" alt="Steve Butler" class="h-6 w-6 rounded-full object-cover sm:h-8 sm:w-8" />
+          Steve Butler
+        </a>
+      </div>
+      <p>
+        See what else I'm building
+        <a href="https://sevenfigurecreators.com" target="_blank" rel="noopener noreferrer" class="underline decoration-[#CEF17B]/30 underline-offset-4 transition-colors hover:text-[#CEF17B] hover:decoration-[#CEF17B]">Seven Figure Creators</a>
+        &amp;
+        <a href="https://headcountzero.com" target="_blank" rel="noopener noreferrer" class="underline decoration-[#CEF17B]/30 underline-offset-4 transition-colors hover:text-[#CEF17B] hover:decoration-[#CEF17B]">HeadcountZero</a>
+      </p>
+    </footer>
+
+    <!-- Access Dialog -->
+    <Dialog id="skills-access-dialog" title="Unlock LinkNinja Skills" size="md">
+      <p class="text-sm text-foreground-muted mb-4">
+        Enter your details to get the full install command. Instant access to 20+ LinkNinja skills for Claude Code — DM pipeline audits, ghost recovery, conversation scoring, CRM workflows, and more.
+      </p>
+      <LeadCaptureForm
+        client:idle
+        formTags={formTags}
+        submitLabel="Unlock Skills"
+        termsHtml={termsHtml}
+      />
+    </Dialog>
+  </body>
+</html>
+
+<style is:global>
+  .sk-body {
+    font-family: 'JetBrains Mono', monospace;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sk-blur {
+    filter: blur(4px);
+    opacity: 0.85;
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .sk-headline {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+  }
+
+  /* Primary solid green button */
+  .sk-btn-green {
+    border: 2px solid #CEF17B;
+    background: #CEF17B;
+    color: #0a0a0a;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .sk-btn-green:hover {
+    background: #dff98e;
+    border-color: #dff98e;
+  }
+
+  /* Secondary muted button */
+  .sk-btn-muted {
+    border: 1px solid #444;
+    background: transparent;
+    color: #888;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.15s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .sk-btn-muted:hover {
+    border-color: #888;
+    color: #e0e0e0;
+  }
+
+  @media (min-width: 640px) {
+    .sk-btn-green,
+    .sk-btn-muted {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Dialog overrides */
+  #skills-access-dialog [data-dialog-panel] {
+    background: #111 !important;
+    border-color: #333 !important;
+  }
+
+  @media (max-width: 640px) {
+    #skills-access-dialog [data-dialog-panel] {
+      max-width: 100% !important;
+      border-radius: 0;
+      min-height: 100vh;
+      max-height: none;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    #skills-access-dialog input,
+    #skills-access-dialog textarea,
+    #skills-access-dialog select {
+      font-size: 16px !important;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-open-dialog]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = el.getAttribute('data-open-dialog');
+      if (id && (window as any).openDialog) (window as any).openDialog(id);
+    });
+  });
+</script>

@@ -1,0 +1,100 @@
+{
+  "version": "0.2.1-beta",
+  "minCliVersion": "1.6.0",
+  "files": {
+    "safe": [
+      "src/components/ui/",
+      "src/components/seo/",
+      "src/components/layout/",
+      "src/layouts/",
+      "src/lib/",
+      "src/styles/tokens/",
+      "src/styles/themes/",
+      "src/styles/global.css",
+      "src/content.config.ts",
+      "tsconfig.json",
+      "eslint.config.js",
+      ".prettierrc",
+      ".prettierignore",
+      ".gitignore",
+      "vercel.json",
+      "netlify.toml",
+      "wrangler.toml",
+      "src/config/nav.config.ts"
+    ],
+    "protected": [
+      "src/config/site.config.ts",
+      "src/config/consent.config.ts",
+      "src/pages/",
+      "src/content/",
+      "src/assets/",
+      "src/components/landing/",
+      "src/components/blog/",
+      "src/components/patterns/",
+      ".env",
+      ".env.example"
+    ]
+  },
+  "dependencies": {
+    "update": {
+      "astro": "6.0.0-beta.9",
+      "@astrojs/mdx": "5.0.0-beta.1",
+      "@astrojs/react": "5.0.0-beta.1"
+    },
+    "remove": ["zod", "astro-seo"],
+    "add": {
+      "class-variance-authority": "^0.7.1"
+    }
+  },
+  "migrations": [
+    {
+      "title": "Update zod imports",
+      "description": "Replace `import { z } from 'zod'` with `import { z } from 'astro/zod'` in all files",
+      "pattern": "import.*from ['\"]zod['\"]",
+      "searchPaths": ["src/pages/api/"]
+    },
+    {
+      "title": "Update Zod 4 API calls",
+      "description": "Replace `z.string().email()` with `z.email()` and `.errors` with `.issues` on ZodError",
+      "pattern": "z\\.string\\(\\)\\.email\\(\\)"
+    },
+    {
+      "title": "Remove experimental.contentIntellisense",
+      "description": "Delete the `experimental: { contentIntellisense: true }` block from astro.config.mjs"
+    },
+    {
+      "title": "Configure astro:env",
+      "description": "Add env schema to astro.config.mjs and update import.meta.env references. See: https://docs.deployvelocity.com/upgrade-guides/beta-1-to-beta-2/"
+    },
+    {
+      "title": "Enable CSP",
+      "description": "Add `security: { csp: true }` to astro.config.mjs with external resource allowlists"
+    },
+    {
+      "title": "Remove colorScheme prop from Button",
+      "description": "The `colorScheme` prop has been removed from Button. To achieve the invert effect, wrap the Button in a `<div class=\"invert-section\">` instead.",
+      "pattern": "colorScheme\\s*[=:]"
+    },
+    {
+      "title": "Remove variant=\"invert\" from Input",
+      "description": "The `variant=\"invert\"` prop has been removed from Input. To achieve the invert effect, wrap the Input in a `<div class=\"invert-section\">` instead.",
+      "pattern": "variant\\s*=\\s*['\"]invert['\"]"
+    },
+    {
+      "title": "Rename selectSize to size on Select",
+      "description": "The `selectSize` prop on Select has been renamed to `size`. Update all usages: `selectSize=\"sm\"` → `size=\"sm\"`.",
+      "pattern": "selectSize\\s*[=:]"
+    },
+    {
+      "title": "Rename textareaSize to size on Textarea",
+      "description": "The `textareaSize` prop on Textarea has been renamed to `size`. Update all usages: `textareaSize=\"sm\"` → `size=\"sm\"`.",
+      "pattern": "textareaSize\\s*[=:]"
+    },
+    {
+      "title": "Migrate routes.ts to nav.config.ts",
+      "description": "The `src/config/routes.ts` route registry has been replaced with `src/config/nav.config.ts`, a simple navigation-only config. Astro handles routing via the filesystem — nav.config.ts only controls which pages appear in menus. Delete routes.ts and update any custom imports.",
+      "pattern": "config/routes",
+      "searchPaths": ["src/"]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+---
+/**
+ * VSL (Video Sales Letter) Page
+ * Hero with embedded video, short bullet copy, single CTA form.
+ * Minimal text, maximum focus on the video.
+ */
+import LeadLayout from '@/layouts/LeadLayout.astro';
+import LeadCaptureForm from '@/components/forms/LeadCaptureForm.tsx';
+import Badge from '@/components/ui/data-display/Badge/Badge.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+
+const formTags = ['funnel_blueprint', 'vsl_page'];
+
+const benefits = [
+  'The exact $10K/mo funnel blueprint we use with clients',
+  'Step-by-step setup guide — no tech skills needed',
+  'Plug-and-play email sequences that convert',
+];
+
+const termsHtml = `<p>By providing my information, I agree to receive communications and accept the <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>`;
+---
+
+<LeadLayout
+  title="Watch: How We Build $10K/mo Funnels"
+  description="Watch the free training on how we help businesses build sales funnels that generate $10K+ per month."
+>
+  <section class="vsl-hero relative overflow-hidden">
+    <div
+      class="bg-grid-pattern pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-40"
+      aria-hidden="true"
+    />
+
+    <div class="mx-auto max-w-6xl px-6 relative z-10 pb-4 md:py-0">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-[var(--space-section-gap)] items-center">
+
+        {/* Left Column: Video Embed + Benefits */}
+        <div class="hidden lg:block">
+          <div class="rounded-xl overflow-hidden border border-border bg-card shadow-lg">
+            <div class="aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                title="Free Training Video"
+                class="w-full h-full"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <div class="mt-[var(--space-heading-gap)]">
+            <h3 class="text-base font-bold text-foreground">In this free training</h3>
+            <ul class="mt-4 space-y-3">
+              {benefits.map((item) => (
+                <li class="flex gap-3 items-start text-foreground-secondary text-sm">
+                  <Icon name="check-circle" size="sm" class="text-brand-500 mt-0.5 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Right Column: Badge + Heading + Description + Form */}
+        <div>
+          <Badge variant="brand" pill>
+            <Icon name="zap" size="xs" />
+            Free Training
+          </Badge>
+
+          <h1 class="mt-3 font-display text-2xl md:text-3xl font-bold tracking-tight text-foreground leading-tight">
+            How We Build $10K/mo Funnels. Watch Free.
+          </h1>
+
+          <p class="mt-2 text-base leading-relaxed text-foreground-muted hidden lg:block">
+            Watch the exact process we use to help businesses build sales funnels
+            that generate $10K+ per month — then get the blueprint free.
+          </p>
+
+          {/* Mobile video */}
+          <div class="mt-4 rounded-xl overflow-hidden border border-border bg-card shadow-lg lg:hidden">
+            <div class="aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+                title="Free Training Video"
+                class="w-full h-full"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <LeadCaptureForm
+            client:load
+            formTags={formTags}
+            submitLabel="Get the Blueprint Free"
+            termsHtml={termsHtml}
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+</LeadLayout>
+
+<style>
+  .vsl-hero {
+    padding-top: calc(var(--space-page-top-sm) + 32px);
+  }
+  @media (min-width: 1024px) {
+    .vsl-hero {
+      padding-top: calc(var(--space-page-top-sm) + 64px);
+    }
+  }
+</style>

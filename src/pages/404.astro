@@ -1,0 +1,91 @@
+---
+import LandingLayout from '@/layouts/LandingLayout.astro';
+import Button from '@/components/ui/form/Button/Button.astro';
+import Icon from '@/components/ui/primitives/Icon/Icon.astro';
+
+---
+
+<LandingLayout
+  title="Page not found"
+  description="This page vanished like a ninja in smoke."
+  noindex
+>
+  <section class="relative flex flex-1 items-center justify-center overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-grid-pattern [mask-image:radial-gradient(ellipse_at_center,white_20%,transparent_70%)] pointer-events-none opacity-40"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-brand-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <!-- Decorative logomark watermark -->
+    <div class="pointer-events-none absolute -top-24 right-[-4rem] hidden h-[36rem] w-[36rem] opacity-[0.04] md:block lg:-top-16 lg:right-12 lg:h-[44rem] lg:w-[44rem] dark:opacity-[0.06]" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="currentColor" class="h-full w-full">
+        <path d="M105.303 218.765V165.79H127.087L227.217 197.279H227.459V165.79H249.242V218.765H227.459L127.329 187.276H127.087V218.765H105.303Z"/>
+        <path d="M176.852 56.0547C97.5695 56.0547 33.3334 120.413 33.3334 199.846C33.3334 279.278 97.5695 343.636 176.852 343.636C256.134 343.636 320.37 279.278 320.37 199.846C320.37 185.13 318.16 170.937 314.063 157.572L351.053 188.284L366.667 152.006L309.838 145.692C309.462 144.764 309.08 143.842 308.681 142.926L363.594 119.485L340.625 87.1553L305.666 136.386C282.274 88.7903 233.391 56.0547 176.852 56.0547ZM100.122 150.574H252.066C276.574 150.574 283.877 179.413 283.2 199.272C282.517 219.466 259.016 241.325 241.401 241.325C205.764 241.325 198.796 217.988 176.094 217.97C153.391 217.988 146.424 241.325 110.787 241.325C93.1713 241.325 69.6702 219.466 68.9873 199.272C68.3102 179.413 75.6135 150.574 100.122 150.574Z"/>
+      </svg>
+    </div>
+
+    <div class="relative container px-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <!-- Animated 404 -->
+        <div class="relative mb-8">
+          <div class="error-code font-display text-[10rem] md:text-[14rem] lg:text-[18rem] font-bold leading-none tracking-tighter select-none">
+            <span class="inline-block error-digit" style="animation-delay: 0s;">4</span>
+            <span class="inline-block error-digit text-transparent bg-clip-text bg-gradient-to-br from-brand-400 via-brand-500 to-brand-600" style="animation-delay: 0.1s;">0</span>
+            <span class="inline-block error-digit" style="animation-delay: 0.2s;">4</span>
+          </div>
+          <!-- Glow effect behind the 0 -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-32 h-32 md:w-48 md:h-48 bg-brand-500/20 rounded-full blur-[60px] animate-pulse"></div>
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <h1 class="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+          This page vanished like a ninja in smoke.
+        </h1>
+
+        <p class="text-lg text-foreground-muted max-w-md mx-auto mb-10">
+          Whatever was here has ghosted you harder than a cold LinkedIn lead.
+        </p>
+
+        <!-- CTA -->
+        <Button href="/" size="lg">
+          <Icon name="arrow-left" size="sm" />
+          Back to Home
+        </Button>
+      </div>
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  .error-code {
+    color: var(--foreground);
+    opacity: 0.15;
+  }
+
+  .error-digit {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .error-digit:nth-child(2) {
+    opacity: 1;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Dark mode adjustments */
+  :global(.dark) .error-code {
+    opacity: 0.1;
+  }
+
+  :global(.dark) .error-digit:nth-child(2) {
+    opacity: 1;
+  }
+</style>

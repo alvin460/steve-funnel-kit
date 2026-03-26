@@ -53,12 +53,12 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  name: "Steve's Funnel Kit",
-  description: 'Production-ready landing pages built on a proper design system. Brand with AI, deploy to Cloudflare for free.',
-  url: SITE_URL || 'https://yourbrand.com',
+  name: 'Damn Good Funnels',
+  description: 'Simple landing pages that actually convert. Built on a proper design system so AI can\'t produce slop.',
+  url: SITE_URL || 'https://damngoodfunnels.com',
   ogImage: '/og-default.png',
   author: 'Steve Butler',
-  email: 'hello@yourbrand.com',
+  email: 'hello@damngoodfunnels.com',
   phoneCountryCode: 'AU',
   socialLinks: [],
   verification: {
@@ -67,7 +67,7 @@ const siteConfig: SiteConfig = {
   },
   branding: {
     logo: {
-      alt: "Steve's Funnel Kit",
+      alt: 'Damn Good Funnels',
     },
     favicon: {
       svg: '/favicon.svg',

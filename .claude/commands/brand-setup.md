@@ -5,20 +5,20 @@ $ARGUMENTS
 ## Step 1: Company Info
 
 Ask the user for:
-1. **Company name** — appears in headers, footers, legal text
-2. **Tagline / description** — shows in Google search results
-3. **Website URL** — their live domain (e.g., `https://example.com`)
-4. **Author name** — for meta tags
-5. **Contact email** — for footer and legal pages
+1. **Company name** … appears in headers, footers, legal text
+2. **Tagline / description** … shows in Google search results
+3. **Website URL** … their live domain (e.g., `https://example.com`)
+4. **Author name** … for meta tags
+5. **Contact email** … for footer and legal pages
 
 If the user provided these in $ARGUMENTS, skip asking and proceed.
 
 Then update `src/config/site.config.ts`:
-- Set `name` to the company name
-- Set `description` to the tagline
-- Set `url` to the live domain
-- Set `author` to the author name
-- Set `email` to the contact email
+-> Set `name` to the company name
+-> Set `description` to the tagline
+-> Set `url` to the live domain
+-> Set `author` to the author name
+-> Set `email` to the contact email
 
 ## Step 2: Brand Color
 
@@ -40,11 +40,10 @@ Show the user the available hue options:
 | Pink | `340` |
 
 Ask which color they want. Then update `src/styles/tokens/primitives.css`:
-- Find all 10 `--brand-*` lines (brand-50 through brand-900)
-- Replace the hue number (last value in the `oklch()` function) on ALL 10 lines
-- The current default hue is `162` (emerald green)
 
-**Important:** Only change the hue (third value). Do NOT change lightness (first value) or chroma (second value) — those are carefully calibrated for accessibility contrast.
+Change `--brand-hue: 162;` to `--brand-hue: <new-value>;` on line 33. That's it … one number, one line. All 10 `--brand-*` variables reference `var(--brand-hue)` and pick up the change automatically.
+
+**Important:** Do NOT touch the individual `--brand-50` through `--brand-900` lines. They use `var(--brand-hue)` … changing the hue variable is all you need.
 
 ## Step 3: Logo Files
 
@@ -59,9 +58,9 @@ Tell the user to place their logo files in `src/assets/branding/`:
 
 Also: replace `public/favicon.svg` with their browser tab icon.
 
-**Tip:** If they only have one logo, they can use the same file for both light and dark variants.
+If they only have one logo, use the same file for both light and dark variants. No drama.
 
-Do NOT create or generate logo files — the user must provide their own SVGs.
+Do NOT create or generate logo files … the user must provide their own SVGs.
 
 ## Step 4: Font (Optional)
 
@@ -80,13 +79,13 @@ Ask if they want to change from the default. If yes:
 2. Update `--theme-font-sans` in `src/styles/themes/default.css` to the new font name
 3. If they want a different display font for headings, also update `--theme-font-display`
 
-**Note:** The monospace font (`JetBrains Mono Variable`) is used for code and prices — leave it as-is unless specifically asked.
+The monospace font (`JetBrains Mono Variable`) is for code and prices … leave it unless specifically asked.
 
 ## Step 5: Theme (Optional)
 
 Two themes are included:
-- `default.css` — Clean, brand-neutral (active by default)
-- `midnight.css` — Deep purple with violet accents
+-> `default.css` … clean, brand-neutral (active by default)
+-> `midnight.css` … deep purple with violet accents
 
 Ask if they want to switch. If yes, update `src/styles/tokens/colors.css` line 9:
 ```css
@@ -100,32 +99,32 @@ Delete the demo-only directory and remove its import from the homepage:
 
 1. Delete the entire `src/components/_demo/` directory
 2. In `src/layouts/BaseLayout.astro`:
-   - Remove the `import ThemeCustomizer from '@/components/_demo/ThemeCustomizer.tsx';` line
-   - Remove the `<ThemeCustomizer client:only="react" />` line
-   - Remove the `<!-- Demo customizer: restore saved theme settings -->` inline `<script>` block (the entire second `<script is:inline>` block that references `sfk-` localStorage keys)
-   - In the first `<script is:inline>` block, remove the `sfk-dark` localStorage check and restore the simple `apply(mq.matches)` pattern
+   -> Remove the `import ThemeCustomizer from '@/components/_demo/ThemeCustomizer.tsx';` line
+   -> Remove the `<ThemeCustomizer client:only="react" />` line
+   -> Remove the `<!-- Demo customizer: restore saved theme settings -->` inline `<script>` block (the entire second `<script is:inline>` block that references `sfk-` localStorage keys)
+   -> In the first `<script is:inline>` block, remove the `sfk-dark` localStorage check and restore the simple `apply(mq.matches)` pattern
 3. In `src/layouts/LeadLayout.astro`:
-   - Remove the `import ThemeCustomizer` line
-   - Remove the `<ThemeCustomizer client:only="react" />` line
-   - Remove the `<!-- Demo customizer -->` inline `<script>` block
-   - Restore the original dark mode script (simple `apply(mq.matches)` pattern)
+   -> Remove the `import ThemeCustomizer` line
+   -> Remove the `<ThemeCustomizer client:only="react" />` line
+   -> Remove the `<!-- Demo customizer -->` inline `<script>` block
+   -> Restore the original dark mode script (simple `apply(mq.matches)` pattern)
 
 These are for the starter kit's demo homepage only and should NOT ship to production.
 
 ## Step 7: Summary
 
 Print what was changed:
-- Site config: company name, URL, etc.
-- Brand color: old hue → new hue (color name)
-- Font: old → new (if changed)
-- Theme: old → new (if changed)
-- Logo files: remind user to place SVGs in `src/assets/branding/`
+-> Site config: company name, URL, etc.
+-> Brand color: old hue → new hue (color name)
+-> Font: old → new (if changed)
+-> Theme: old → new (if changed)
+-> Logo files: remind user to place SVGs in `src/assets/branding/`
 
 Print the test URL:
-- App: http://localhost:4321
+-> App: http://localhost:4321
 
 Tell the user to check:
-- Header shows their company name and logo
-- Brand color appears on buttons, links, and accents
-- Dark mode toggle works (top right) and colors adapt
-- Footer has correct company info
+-> Header shows their company name and logo
+-> Brand color appears on buttons, links, and accents
+-> Dark mode toggle works (top right) and colors adapt
+-> Footer has correct company info

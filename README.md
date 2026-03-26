@@ -484,7 +484,7 @@ src/
 │   ├── layout/             # Header, Footer
 │   ├── hero/               # Hero section component
 │   └── seo/                # SEO metadata
-├── layouts/                # Page wrappers (Marketing, Landing, Lead, Blog)
+├── layouts/                # Page wrappers (Marketing, Landing, Lead, Page, Blog)
 ├── styles/
 │   ├── tokens/             # Design tokens (colors, typography, spacing)
 │   └── themes/             # Theme files (default, midnight)
@@ -517,6 +517,8 @@ The kit handles this with an inline script in `<head>`. If you've modified `Base
 ---
 
 ## MORE FROM STEVE
+
+Other stuff I'm building …
 
 → [LinkNinja](https://linkninja.co) … AI-powered LinkedIn sales pipeline. Close deals in DMs without the cringe.
 → [Seven Figure Creators](https://sevenfigurecreators.com) … Use LinkedIn to hit 6, then 7 figures. The playbook.

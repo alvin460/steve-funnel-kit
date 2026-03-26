@@ -40,7 +40,7 @@ const faqItems = [
   {/* ═══════════════════════════════════════════════════
       HERO — Dark background, split layout
   ═══════════════════════════════════════════════════ */}
-  <Hero layout="split" size="xl" class="invert-section">
+  <Hero layout="split" size="lg" class="invert-section">
     <Badge slot="badge" variant="brand" pill>For Business Owners Ready to Scale</Badge>
     <h1 slot="title">Ready to build your<br />growth engine?</h1>
     <p slot="description">
@@ -90,7 +90,7 @@ const faqItems = [
   ═══════════════════════════════════════════════════ */}
   <section class="py-[var(--space-section-lg)] bg-secondary">
     <div class="mx-auto max-w-6xl px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div class="aspect-video w-full rounded-xl overflow-hidden">
           <iframe
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -102,7 +102,7 @@ const faqItems = [
           ></iframe>
         </div>
         <div>
-          <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+          <h2 class="font-display text-2xl md:text-4xl font-bold tracking-tight text-foreground">
             Imagine going from current state to $10M+ per year FAST.
           </h2>
           <p class="mt-4 text-lg font-semibold text-foreground">What's stopping you?</p>
@@ -133,7 +133,7 @@ const faqItems = [
           people — and it's hard to make it happen, especially as fast as you want it to.
         </p>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
         {[
           { title: 'A Trusted Brand', icon: 'globe' },
           { title: 'Lead Generation', icon: 'users' },
@@ -227,17 +227,17 @@ const faqItems = [
   ═══════════════════════════════════════════════════ */}
   <section class="py-[var(--space-section-lg)]">
     <div class="mx-auto max-w-6xl px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div>
           <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">The Outcomes We Drive</p>
           <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight text-foreground">
             Supercharge Your Website & Landing Pages
           </h2>
         </div>
-        <div class="grid grid-cols-3 gap-4">
-          <StatCard label="Your Brand" value="10x" icon="star" />
+        <div class="grid grid-cols-3 gap-3 md:gap-4">
+          <StatCard label="Brand" value="10x" icon="star" />
           <StatCard label="Conversion" value="10x" icon="trending-up" />
-          <StatCard label="Easier to Manage" value="10x" icon="zap" />
+          <StatCard label="Manage" value="10x" icon="zap" />
         </div>
       </div>
     </div>
@@ -248,7 +248,7 @@ const faqItems = [
   ═══════════════════════════════════════════════════ */}
   <section class="invert-section py-[var(--space-section-lg)] bg-background">
     <div class="mx-auto max-w-6xl px-6">
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
         <div class="md:col-span-3">
           <svg class="w-10 h-10 text-foreground-subtle opacity-50" viewBox="0 0 24 24" fill="currentColor"><path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" /></svg>
           <p class="mt-4 text-2xl font-semibold leading-snug text-foreground">
@@ -494,7 +494,7 @@ const faqItems = [
     showCopyright
     legalLinks={[
       { label: 'Terms', href: '/terms' },
-      { label: 'Terms', href: '/terms' },
+      { label: 'Privacy', href: '/terms' },
     ]}
   />
 

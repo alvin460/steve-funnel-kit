@@ -26,6 +26,8 @@ export interface SiteConfig {
     google?: string;
     bing?: string;
   };
+  /** ISO 3166-1 alpha-2 default country for phone input (e.g. 'AU', 'US', 'GB') */
+  phoneCountryCode?: string;
   /**
    * Branding configuration
    * Logo files: Replace SVGs in src/assets/branding/
@@ -57,6 +59,7 @@ const siteConfig: SiteConfig = {
   ogImage: '/og-default.png',
   author: 'Steve Butler',
   email: 'hello@yourbrand.com',
+  phoneCountryCode: 'AU',
   socialLinks: [],
   verification: {
     google: GOOGLE_SITE_VERIFICATION,

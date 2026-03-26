@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useRef, forwardRef, useImperativeHandle } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
@@ -7,6 +7,43 @@ import 'react-phone-number-input/style.css';
 import { cn } from '@/lib/cn';
 import { inputVariants } from '@/components/ui/form/Input/input.variants';
 import { buttonVariants } from '@/components/ui/form/Button/button.variants';
+import siteConfig from '@/config/site.config';
+
+/** Custom input that prevents cursor from landing before the country calling code */
+const PhoneField = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
+  function PhoneField(props, ref) {
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(ref, () => inputRef.current!);
+
+    const clampCursor = useCallback(() => {
+      const el = inputRef.current;
+      if (!el) return;
+      const match = el.value.match(/^\+\d+\s*/);
+      if (!match) return;
+      const min = match[0].length;
+      requestAnimationFrame(() => {
+        if (el.selectionStart !== null && el.selectionStart < min) {
+          el.setSelectionRange(min, min);
+        }
+      });
+    }, []);
+
+    return (
+      <input
+        {...props}
+        ref={inputRef}
+        onFocus={(e) => {
+          props.onFocus?.(e);
+          clampCursor();
+        }}
+        onClick={(e) => {
+          props.onClick?.(e);
+          clampCursor();
+        }}
+      />
+    );
+  }
+);
 
 interface Props {
   formTags?: string[];
@@ -15,6 +52,8 @@ interface Props {
   successLinkUrl?: string;
   successLinkLabel?: string;
   termsHtml?: string;
+  /** Override default country from site.config.ts (ISO 3166-1 alpha-2, e.g. 'US') */
+  defaultCountry?: string;
 }
 
 interface FormData {
@@ -29,6 +68,7 @@ export default function LeadCaptureForm({
   successLinkUrl,
   successLinkLabel = 'Access Your Resource',
   termsHtml,
+  defaultCountry,
 }: Props) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -187,9 +227,11 @@ export default function LeadCaptureForm({
           </label>
           <PhoneInput
             international
-            defaultCountry="AU"
+            countryCallingCodeEditable={false}
+            defaultCountry={(defaultCountry || siteConfig.phoneCountryCode || 'AU') as any}
             value={phone}
             onChange={setPhone}
+            inputComponent={PhoneField}
             className="phone-input-kit"
           />
           {phoneError && (

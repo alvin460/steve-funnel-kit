@@ -1,6 +1,12 @@
+<p align="center">
+  <img src="docs/damngood.png" alt="Damn Good Funnels" width="480" />
+</p>
+
 # Steve's Funnel Kit
 
 Simple landing pages that actually convert. Built on a proper design system so AI can't produce slop.
+
+> This repo is called Steve's Funnel Kit. The site is [damngoodfunnels.com](https://damngoodfunnels.com). The logo says Damn Good Funnels. Same project … different hat.
 
 ---
 
@@ -9,6 +15,56 @@ Simple landing pages that actually convert. Built on a proper design system so A
 A starter kit for building landing pages with AI. Clone the repo, tell your AI coding tool what you want, and it builds pages that look like you hired a designer. Twelve templates, 33 UI components, GoHighLevel CRM integration, free hosting on Cloudflare.
 
 The whole thing is designed so non-technical people can ship production-quality landing pages in under an hour.
+
+---
+
+## HOW IT ALL FITS TOGETHER
+
+Never touched code before? No worries. Here's every piece and how they connect.
+
+```mermaid
+flowchart TD
+    subgraph BUILD["WHAT YOU WORK WITH"]
+        direction TB
+        CC["Claude Code … your AI builder"]
+        ASTRO["Astro 5 … builds your pages"]
+        REACT["React 19 … powers the forms"]
+        TW["Tailwind CSS 4 … styling + design tokens"]
+        CC -->|"creates & edits pages"| ASTRO
+        ASTRO --- REACT
+        ASTRO --- TW
+    end
+
+    subgraph SHIP["HOW IT GOES LIVE"]
+        direction TB
+        GH["GitHub … your fork of this repo"]
+        CF["Cloudflare Pages … free hosting + SSL"]
+        GH -->|"auto-deploys on push"| CF
+    end
+
+    subgraph LEADS["WHERE LEADS GO"]
+        direction TB
+        API["API endpoints … /api/lead, /api/contact"]
+        GHL["GoHighLevel … CRM + automations"]
+        API -->|"sends contact data"| GHL
+    end
+
+    ASTRO -->|"git push"| GH
+    CF -->|"serves your site to"| VISITOR["Visitors"]
+    VISITOR -->|"fills out a form"| API
+```
+
+**What you need before you start:**
+
+| Piece | What it is | Cost |
+|-------|-----------|------|
+| [Claude Code](https://claude.ai/code) | AI coding tool … builds pages for you | Subscription |
+| [Node.js](https://nodejs.org) | Runs the dev server locally | Free |
+| [GitHub CLI (`gh`)](https://cli.github.com) | Fork, clone, manage your repo from terminal | Free |
+| [Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/) | Cloudflare CLI … deploy, set secrets, manage Pages | Free |
+| [GoHighLevel](https://www.gohighlevel.com) | CRM … captures and manages your leads | Subscription |
+
+> You don't need to understand any of this tech. Claude Code handles the code. The CLIs handle the infrastructure. You describe what you want … it gets built.
 
 ---
 
@@ -28,30 +84,35 @@ The whole thing is designed so non-technical people can ship production-quality 
 
 ## GET STARTED … ZERO TO LIVE IN AN HOUR
 
-### Step 1: Get Claude Code
+### Step 1: Install your tools
 
-Go to [claude.ai/code](https://claude.ai/code) and install it. Claude Code is an AI coding tool that runs in your terminal. It reads the design system files in this repo and knows exactly how to build pages correctly.
+You need four things installed. All free except Claude Code.
+
+```bash
+# Claude Code … your AI builder
+# Install from https://claude.ai/code
+
+# Node.js … runs the dev server
+# Install from https://nodejs.org (LTS version)
+
+# GitHub CLI … manages your repo from terminal
+brew install gh          # macOS
+# or: https://cli.github.com for Windows/Linux
+
+# Wrangler … Cloudflare CLI for deploy + secrets
+npm install -g wrangler
+```
 
 Other AI tools work too ([Cursor](https://cursor.com), [Windsurf](https://windsurf.com), [Codex](https://openai.com/index/introducing-codex/)) but Claude Code is currently the best at this.
 
-### Step 2: Get GitHub + fork this repo
+### Step 2: Fork + clone the repo
 
-If you don't have a GitHub account, sign up at [github.com](https://github.com) (free).
-
-Then fork this repo into your own account:
-
-→ Go to [github.com/stvbutlr/steve-funnel-kit](https://github.com/stvbutlr/steve-funnel-kit)
-→ Click **Fork** (top right)
-→ Uncheck "Copy the main branch only" if you want staging too
-→ Click **Create fork**
-
-Now clone your fork locally:
+Three commands. That's it.
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/steve-funnel-kit.git
-cd steve-funnel-kit
-npm install
-npm run dev
+gh auth login                                        # one-time … authenticates GitHub
+gh repo fork stvbutlr/steve-funnel-kit --clone       # forks into your account + clones locally
+cd steve-funnel-kit && npm install && npm run dev     # install deps + start dev server
 ```
 
 Open `http://localhost:4321` in your browser. You'll see the template gallery with live previews of every page.
@@ -145,34 +206,65 @@ Done. The analytics component picks it up automatically.
 
 ### Step 7: Deploy to Cloudflare (free)
 
-Type `/deploy-setup` in Claude Code for the guided version. Or manually:
+Type `/deploy-setup` in Claude Code for the guided version. Or do it yourself from the terminal:
 
-**7a.** Go to [dash.cloudflare.com](https://dash.cloudflare.com) and sign up (free)
+**7a. Sign up + login:**
 
-**7b.** **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
+Sign up at [dash.cloudflare.com](https://dash.cloudflare.com) (free), then:
 
-→ Connect your GitHub account if you haven't already
+```bash
+wrangler login    # opens browser … authorize and done
+```
+
+**7b. Connect your repo for auto-deploy:**
+
+Go to **Workers & Pages** → **Create** → **Pages** → **Connect to Git** in the Cloudflare dashboard.
+
+→ Connect your GitHub account
 → Select your forked `steve-funnel-kit` repo
 → Production branch: `main`
-
-**7c.** Build settings:
 → Build command: `npm run build`
 → Output directory: `dist`
 
-**7d.** Add environment variables in **Settings > Environment Variables**:
+> This is the one dashboard step. It links GitHub to Cloudflare so every push auto-deploys. One-time, takes 60 seconds.
 
-| Variable | Value | Encrypt? |
-|----------|-------|----------|
-| `GHL_API_KEY` | Your API key | **Yes** |
-| `GHL_LOCATION_ID` | Your location ID | **Yes** |
-| `SITE_URL` | `https://yourdomain.com` | No |
-| `PUBLIC_GA_MEASUREMENT_ID` | `G-XXXXXXXXXX` (optional) | No |
+**7c. Store your secrets via CLI:**
 
-> Encrypted = one-way. Nobody can read it back. That's the point.
+```bash
+# Each command prompts for the value … never visible in logs or history
+wrangler pages secret put GHL_API_KEY --project-name your-project-name
+wrangler pages secret put GHL_LOCATION_ID --project-name your-project-name
+wrangler pages secret put SITE_URL --project-name your-project-name
 
-**7e.** Add your custom domain: **Custom Domains** → add your domain. SSL is automatic.
+# Optional … analytics
+wrangler pages secret put PUBLIC_GA_MEASUREMENT_ID --project-name your-project-name
+```
 
-**7f.** That's it. Every push to `main` auto-deploys. Your site is live. $0/month.
+> `your-project-name` is whatever you named it in step 7b. Check with `wrangler pages project list`.
+
+**7d. Add your custom domain:**
+
+In the Cloudflare dashboard: **your Pages project** → **Custom Domains** → add your domain. SSL is automatic.
+
+### Step 8: Point your domain
+
+This is the only truly manual step. Two options depending on your DNS setup:
+
+**Option A … Move nameservers to Cloudflare (recommended):**
+
+In your domain registrar (GoDaddy, Namecheap, etc.), change the nameservers to the ones Cloudflare gives you. Cloudflare then manages all your DNS. Easiest path … everything just works.
+
+**Option B … Add a CNAME record (if you can't move nameservers):**
+
+In your current DNS provider, add a CNAME record:
+
+```
+Type:   CNAME
+Name:   @ (or www)
+Value:  your-project-name.pages.dev
+```
+
+> Either way, SSL is automatic. Your site is live. $0/month.
 
 ### Deployment workflows
 

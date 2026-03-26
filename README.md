@@ -520,6 +520,6 @@ The kit handles this with an inline script in `<head>`. If you've modified `Base
 
 Other stuff I'm building …
 
-→ [LinkNinja](https://linkninja.co) … AI-powered LinkedIn sales pipeline. Close deals in DMs without the cringe.
+→ [LinkNinja](https://linkninja.co) … AI-powered LinkedIn sales pipeline. Close more deals in DMs.
 → [Seven Figure Creators](https://sevenfigurecreators.com) … Use LinkedIn to hit 6, then 7 figures. The playbook.
 → [Headcount Zero](https://headcountzero.com) … Systems over staff. Building lean businesses with zero employees. Coming soon.

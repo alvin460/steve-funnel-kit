@@ -127,19 +127,23 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const locationId = runtime?.env?.GHL_LOCATION_ID || import.meta.env.GHL_LOCATION_ID;
 
     if (!apiKey || !locationId) {
-      console.error('Missing GHL environment variables');
+      const missing = [!apiKey && 'GHL_API_KEY', !locationId && 'GHL_LOCATION_ID'].filter(Boolean).join(', ');
+      console.error(`Missing GHL environment variables: ${missing}`);
       return new Response(JSON.stringify({ success: false, message: 'Server configuration error' } satisfies APIResponse), { status: 500, headers });
     }
 
-    // Look up the contact by email (they were created in step 1)
+    // Upsert first (requires contacts.write scope), fall back to lookup
     let contactId: string | undefined;
-    const lookup = await lookupContactByEmail(email, locationId, apiKey);
-    if (lookup.success && lookup.contactId) {
-      contactId = lookup.contactId;
-    } else {
-      // Fallback: upsert to get/create the contact
-      const upsert = await upsertContact({ firstName: '', email, locationId, source: 'Website' }, apiKey);
-      if (upsert.success) contactId = upsert.contactId;
+    const upsert = await upsertContact({ firstName: '', email, locationId, source: 'Website' }, apiKey);
+    if (upsert.success) {
+      contactId = upsert.contactId;
+    } else if (upsert.statusCode === 401 || upsert.statusCode === 403) {
+      console.error('GHL authorization error — check API key scopes. Required: contacts.write');
+      return new Response(JSON.stringify({ success: false, message: 'Server configuration error' } satisfies APIResponse), { status: 502, headers });
+    }
+    if (!contactId) {
+      const lookup = await lookupContactByEmail(email, locationId, apiKey);
+      if (lookup.success) contactId = lookup.contactId;
     }
 
     if (!contactId) {

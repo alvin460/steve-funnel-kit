@@ -315,8 +315,8 @@ const faqItems = [
           { title: 'Web Design & Copywriting', desc: 'Craft beautiful, high-converting pages with copy that speaks directly to your buyer and drives action.' },
           { title: 'Strategy & Sitemap', desc: 'Map out your entire online presence with a clear structure built for conversions and growth.' },
           { title: 'CRM & Automation Setup', desc: 'Build and launch your complete CRM, lead funnels, payment pages, and sales automation workflows.' },
-          { title: 'Sales Funnel Implementation', desc: 'High-converting landing pages, upsell flows, and complete funnel architecture built for your offer.' },
-          { title: 'Development / Tech', desc: 'Production-grade code, integrations, and infrastructure built to scale with your business.' },
+          { title: 'Sales Funnel Implementation', desc: 'High-converting landing pages, upsell flows, and complete funnel architecture built and optimised for your offer.' },
+          { title: 'Development / Tech', desc: 'Production-grade code, integrations, and infrastructure built to perform, scale, and grow with your business.' },
         ].map(({ title, desc }, i) => (
           <div class:list={[
             'py-6 md:p-6 border-b border-border',
@@ -354,7 +354,7 @@ const faqItems = [
         {[
           { num: 'Bonus 1', title: 'Membership to Our Creator Community', desc: 'Get 1 Year of Membership including access to a community of creators, bi-weekly coaching calls, and course modules.' },
           { num: 'Bonus 2', title: 'Monthly Product Drops', desc: 'Get access to 12 Months of Monthly Product Drops, including high-converting page templates, plug-and-play strategies, and walkthroughs.' },
-          { num: 'Bonus 3', title: 'Weekly Group Coaching', desc: 'Get 2 Weekly Group Coaching Sessions with on-demand tech help, strategy sessions, and expert guidance.' },
+          { num: 'Bonus 3', title: 'Weekly Group Coaching', desc: 'Get 2 Weekly Group Coaching Sessions with on-demand tech help, live strategy sessions, expert guidance, and real-time feedback.' },
           { num: 'Bonus 4', title: 'Exclusive Growth Playbook Library', desc: 'Unlock our Exclusive Growth Playbook Library, featuring proven frameworks, ready-to-use scripts, and a curated collection of SOPs.' },
         ].map(({ num, title, desc }) => (
           <Card variant="default" padding="lg">
@@ -437,7 +437,7 @@ const faqItems = [
               ['Overwhelm & doubt', 'Always guessing, second-guessing, and feeling stuck.'],
             ].map(([label, desc]) => (
               <li class="flex gap-3 text-sm text-foreground-muted">
-                <div class="w-2 h-2 rounded-full bg-[var(--error)] shrink-0 mt-1.5" />
+                <div class="w-2 h-2 rounded-full bg-error shrink-0 mt-1.5" />
                 <span><strong class="text-foreground">{label}</strong> — {desc}</span>
               </li>
             ))}

@@ -401,6 +401,34 @@ All endpoints validate origin, enforce body size limits, and sanitize input. The
 </ul>
 ```
 
+## Creating or Modifying Pages
+
+When creating new pages or modifying existing ones, follow these rules exactly:
+
+1. **Always use a layout.** Every page must import and wrap content in one of: `MarketingLayout`, `LandingLayout`, `LeadLayout`, `PageLayout`, `BlogLayout`. Never write standalone HTML.
+2. **Always use existing components.** Check `src/components/ui/` before building custom elements. Use `Card`, `Button`, `Badge`, `Icon`, `Alert`, `Accordion`, etc.
+3. **Never hardcode colors.** No hex values, no `rgb()`, no Tailwind default palette (`bg-blue-500`, `text-gray-700`). Only token classes: `bg-background`, `text-foreground`, `text-brand-500`, `border-border`, etc.
+4. **Use section spacing tokens.** Sections use `py-[var(--space-section)]` or `py-[var(--space-section-lg)]`. Section headers get `mb-[var(--space-section-header)]`. Never use arbitrary padding like `py-[47px]`.
+5. **Use `container` for max-width.** Content containers use `mx-auto max-w-6xl px-6` or the `container` class. Never set arbitrary max-widths.
+6. **Follow the heading pattern.** Headings use `font-display tracking-tight text-foreground` with responsive sizing (`text-3xl md:text-4xl`). Never skip these classes.
+7. **Balance all repeated content.** See Copy Balance Rules below.
+8. **Use `invert-section` for dark sections.** Add `class="invert-section"` to the container. Never manually override colors inside inverted sections.
+
+## Copy Balance Rules
+
+Professional design requires visual symmetry. When writing content for repeated components:
+
+-> **Card grids**: All card descriptions within ±2 words of each other. All card titles within ±1 word.
+-> **Bullet/checklist items**: All items within ±2 words of each other.
+-> **Testimonial quotes**: All quotes within ±10 words of each other.
+-> **Feature descriptions**: All descriptions within ±2 words of each other.
+
+Before finishing a page, count words in every repeated group. If any item is noticeably shorter or longer than its siblings, rewrite it to match. A card grid where one card has 42 words and another has 20 is unacceptable.
+
+## Brand-Setup Check
+
+Before creating pages for a user, check `src/config/site.config.ts`. If `name` still says "Damn Good Funnels" and the user is building for a different brand, prompt them to run `/brand-setup` first. Creating pages before branding means the AI instructions, site metadata, and token colors won't match the user's brand.
+
 ## Demo Content … Replace Before Going Live
 
 The kit ships with example content. Replace these before deploying:

@@ -160,7 +160,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const locationId = runtime?.env?.GHL_LOCATION_ID || import.meta.env.GHL_LOCATION_ID;
 
     if (!apiKey || !locationId) {
-      console.error('Missing GHL environment variables');
+      const missing = [!apiKey && 'GHL_API_KEY', !locationId && 'GHL_LOCATION_ID'].filter(Boolean).join(', ');
+      console.error(`Missing GHL environment variables: ${missing}`);
       return new Response(
         JSON.stringify({
           success: false,
@@ -202,6 +203,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
       );
     }
 
+    if (result.statusCode === 401 || result.statusCode === 403) {
+      console.error('GHL authorization error — check API key scopes. Required: contacts.write');
+    }
     console.error('GHL API error:', result.statusCode);
     return new Response(
       JSON.stringify({

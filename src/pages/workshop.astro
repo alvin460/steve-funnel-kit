@@ -22,16 +22,16 @@ const termsHtml = `<p>By registering, I agree to receive communications and acce
 const perfectFor = [
   'Coaches and consultants who want more booked calls',
   'Agency owners looking to generate leads without ads',
-  'Course creators building an audience from scratch',
-  'Anyone tired of posting content and hoping for the best',
+  'Course creators building an engaged audience from scratch',
+  'Anyone tired of posting content and just hoping',
   'People who want a system, not a hack',
 ];
 
 const notFor = [
-  'Looking for a get-rich-quick scheme',
-  'Not willing to put in the work to implement',
+  'Looking for a get-rich-quick scheme or overnight shortcut to success',
+  'Not willing to do the work and implement what you learn',
   'Happy with your current results and not looking to change',
-  'Want someone to do it all for you (we teach, you build)',
+  'Want someone to do everything for you without learning anything',
 ];
 ---
 
@@ -214,7 +214,7 @@ const notFor = [
       <ul class="space-y-3 my-6 text-foreground-secondary">
         {notFor.map(item => (
           <li class="flex items-start gap-3">
-            <Icon name="x" size="sm" class="text-[var(--error)] mt-0.5 shrink-0" />
+            <Icon name="x" size="sm" class="text-error mt-0.5 shrink-0" />
             <span>{item}</span>
           </li>
         ))}

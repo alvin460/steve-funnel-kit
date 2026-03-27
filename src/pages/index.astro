@@ -74,14 +74,14 @@ const templates = [
   {
     name: 'Form (Step 2)',
     slug: '/form/step-2?email=demo@example.com',
-    description: 'Qualification form. Collects custom questions, saves as GHL contact notes.',
+    description: 'Qualification form. Collects custom questions and saves responses as GHL contact notes. Fully configurable.',
     category: 'Forms',
     screenshot: '/images/templates/form.png',
   },
   {
     name: 'Success Page',
     slug: '/success',
-    description: 'Resource delivery page. Checkmark, download button, confirmation message.',
+    description: 'Resource delivery page. Checkmark animation, download button, and confirmation message. Redirects or links as needed.',
     category: 'Utility',
     screenshot: '/images/templates/success.png',
   },
@@ -407,13 +407,13 @@ const templates = [
           {
             num: '02',
             title: 'Pick a template',
-            desc: 'Browse the templates above. Copy the file, rename it, change the copy. Or just tell your AI tool: "Create a new landing page for my coaching program."',
+            desc: 'Browse the templates above. Copy the file, rename it, change the copy. Or tell your AI tool to create a page for you.',
             icon: 'layout',
           },
           {
             num: '03',
             title: 'Go live',
-            desc: 'Run /deploy-setup. It connects your GoHighLevel CRM and deploys to Cloudflare Pages. Free hosting. Free SSL. Done.',
+            desc: 'Run /deploy-setup. It connects your GoHighLevel CRM and deploys to Cloudflare Pages. Custom domain, free hosting, free SSL, automatic deploys. Done.',
             icon: 'globe',
           },
         ].map(({ num, title, desc, icon }) => (
@@ -463,7 +463,7 @@ const templates = [
             command: '/deploy-setup',
             icon: 'globe',
             title: 'Go Live',
-            description: 'Connect GoHighLevel, set up Cloudflare Pages, deploy with free SSL. The whole thing.',
+            description: 'Connect GoHighLevel, set up Cloudflare Pages, configure your custom domain, and deploy with free SSL. The whole thing.',
           },
         ].map(({ command, icon, title, description }) => (
           <Card variant="solid" padding="lg">
@@ -524,8 +524,8 @@ const templates = [
             <div>
               <h3 class="text-base font-bold text-foreground mb-1">GHL API Keys Stay Secret</h3>
               <p class="text-sm text-foreground-muted leading-relaxed">
-                Your GoHighLevel API key and location ID go in a <code class="font-mono text-brand-500 bg-secondary px-1.5 py-0.5 rounded text-xs">.env</code> file locally (gitignored, never committed).
-                On Cloudflare, they're stored as <strong class="text-foreground">encrypted environment variables</strong>… one-way encryption, not even you can read them back. They never touch the frontend.
+                Your GoHighLevel API key and location ID live in a <code class="font-mono text-brand-500 bg-secondary px-1.5 py-0.5 rounded text-xs">.env</code> file locally (gitignored, never committed).
+                On Cloudflare, they're stored as <strong class="text-foreground">encrypted environment variables</strong>. They never touch the frontend.
               </p>
             </div>
           </div>
@@ -572,7 +572,7 @@ const templates = [
                 Copy <code class="font-mono text-brand-500 bg-secondary px-1.5 py-0.5 rounded text-xs">.env.example</code> to
                 <code class="font-mono text-brand-500 bg-secondary px-1.5 py-0.5 rounded text-xs">.env</code>.
                 Add your GHL API key and location ID.
-                Update <code class="font-mono text-brand-500 bg-secondary px-1.5 py-0.5 rounded text-xs">ALLOWED_ORIGINS</code> with your domain. That's it.
+                Update <code class="font-mono text-brand-500 bg-secondary px-1.5 py-0.5 rounded text-xs">ALLOWED_ORIGINS</code> with your production domain. Run /deploy-setup and you're live. That's the whole process.
               </p>
             </div>
           </div>

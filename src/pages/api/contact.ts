@@ -12,6 +12,8 @@ const contactSchema = z.object({
 });
 
 const ALLOWED_ORIGINS = [
+  'https://www.effective-outcomes.com',
+  'https://effective-outcomes.com',
   // TODO: Add your production domain(s)
   // 'https://yourdomain.com',
   // 'https://www.yourdomain.com',

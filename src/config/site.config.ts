@@ -53,13 +53,13 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  name: 'Damn Good Funnels',
-  description: 'Simple landing pages that actually convert. Built on a proper design system so AI can\'t produce slop.',
-  url: SITE_URL || 'https://damngoodfunnels.com',
+  name: 'Effective Outcomes',
+  description: 'Executive Fitness & Performance Coaching',
+  url: SITE_URL || 'https://www.effective-outcomes.com',
   ogImage: '/og-default.png',
-  author: 'Steve Butler',
-  email: 'hello@damngoodfunnels.com',
-  phoneCountryCode: 'AU',
+  author: 'Alvin Sicre',
+  email: 'alvin@effective-outcomes.com',
+  phoneCountryCode: 'LU',
   socialLinks: [],
   verification: {
     google: GOOGLE_SITE_VERIFICATION,
@@ -67,14 +67,14 @@ const siteConfig: SiteConfig = {
   },
   branding: {
     logo: {
-      alt: 'Damn Good Funnels',
+      alt: 'Effective Outcomes',
     },
     favicon: {
       svg: '/favicon.svg',
     },
     colors: {
-      themeColor: '#3ECF8E',
-      backgroundColor: '#0f0f11',
+      themeColor: '#0F0F0F',
+      backgroundColor: '#0F0F0F',
     },
   },
 };

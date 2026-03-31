@@ -34,6 +34,8 @@ function getClientIp(request: Request): string {
 }
 
 const ALLOWED_ORIGINS = [
+  'https://www.effective-outcomes.com',
+  'https://effective-outcomes.com',
   // TODO: Add your production domain(s)
   // 'https://yourdomain.com',
   // 'https://www.yourdomain.com',

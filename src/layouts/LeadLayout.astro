@@ -4,9 +4,6 @@ import SEO from '@/components/seo/SEO.astro';
 import Logo from '@/components/ui/marketing/Logo/Logo.astro';
 import Footer from '@/components/layout/Footer.astro';
 import siteConfig from '@/config/site.config';
-// Demo: theme customizer + restore script. Customizer self-checks via /api/demo-mode at runtime.
-import ThemeCustomizer from '@/components/_demo/ThemeCustomizer.tsx';
-import DemoRestore from '@/components/_demo/DemoRestore.astro';
 
 interface Props {
   title?: string;
@@ -29,22 +26,8 @@ const { title, description } = Astro.props;
     <SEO title={title} description={description} noindex={true} />
 
     <script is:inline>
-      (function () {
-        var mq = window.matchMedia('(prefers-color-scheme: dark)');
-        function apply() {
-          var sfkDark = localStorage.getItem('sfk-dark');
-          if (sfkDark !== null) {
-            document.documentElement.classList.toggle('dark', sfkDark === '1');
-            return;
-          }
-          document.documentElement.classList.toggle('dark', mq.matches);
-        }
-        apply();
-        mq.addEventListener('change', apply);
-      })();
+      document.documentElement.classList.add('dark');
     </script>
-
-    <DemoRestore />
   </head>
 
   <body class="min-h-screen flex flex-col bg-background text-foreground antialiased">
@@ -65,7 +48,6 @@ const { title, description } = Astro.props;
         { label: 'Privacy', href: '/terms' },
       ]}
     />
-    <ThemeCustomizer client:only="react" />
   </body>
 </html>
 

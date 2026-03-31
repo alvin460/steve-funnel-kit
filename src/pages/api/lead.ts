@@ -17,7 +17,7 @@ const ALLOWED_TAGS = [
   'lead_magnet',
   'form_qualify',
   'workshop_signup',
-  // TODO: Add your custom tags here
+  'baseline_challenge_ed2',
 ];
 
 const MAX_REQUESTS_PER_MINUTE = 10;
@@ -52,6 +52,8 @@ function getClientIp(request: Request): string {
 }
 
 const ALLOWED_ORIGINS = [
+  'https://www.effective-outcomes.com',
+  'https://effective-outcomes.com',
   // TODO: Add your production domain(s)
   // 'https://yourdomain.com',
   // 'https://www.yourdomain.com',

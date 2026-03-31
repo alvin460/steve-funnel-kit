@@ -32,18 +32,6 @@ export default defineConfig({
     server: {
       allowedHosts: true,
     },
-    ssr: {
-      resolve: {
-        // Force react-dom/server to use the edge build (no MessageChannel dependency)
-        // The default @astrojs/cloudflare alias points to server.browser which breaks on workerd
-        conditions: ['workerd', 'worker', 'browser'],
-      },
-    },
-    resolve: {
-      alias: {
-        'react-dom/server': 'react-dom/server.edge',
-      },
-    },
   },
 
   markdown: {

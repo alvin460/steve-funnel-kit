@@ -131,43 +131,44 @@
    Dark Mode
    ------------------------------------------------------------------------- */
 .dark {
-  --background: var(--gray-950);
-  --background-secondary: var(--gray-900);
-  --background-tertiary: var(--gray-800);
-  --background-elevated: var(--gray-900);
+  /* Effective Outcomes palette */
+  --background: oklch(11% 0 0);           /* #0F0F0F */
+  --background-secondary: oklch(14% 0 0); /* #161616 */
+  --background-tertiary: oklch(17% 0 0);
+  --background-elevated: oklch(14% 0 0);  /* #161616 */
 
-  --foreground: var(--gray-50);
-  --foreground-secondary: var(--gray-300);
-  --foreground-muted: var(--gray-400);
-  --foreground-subtle: oklch(58% 0.010 265);
+  --foreground: oklch(92% 0.006 75);      /* #E8E4DF */
+  --foreground-secondary: oklch(78% 0.006 75);
+  --foreground-muted: oklch(58% 0.006 75); /* #8A8580 */
+  --foreground-subtle: oklch(46% 0.006 75);
 
-  --border: var(--gray-800);
-  --border-strong: var(--gray-700);
-  --border-subtle: var(--gray-900);
+  --border: oklch(22% 0 0);               /* #2A2A2A */
+  --border-strong: oklch(28% 0 0);
+  --border-subtle: oklch(16% 0 0);
 
-  --primary: var(--gray-0);
-  --primary-hover: var(--gray-200);
-  --primary-foreground: var(--gray-900);
+  --primary: var(--brand-300);            /* #c1ff72 lime */
+  --primary-hover: var(--brand-400);
+  --primary-foreground: oklch(11% 0 0);   /* dark text on lime */
 
-  --secondary: var(--gray-800);
-  --secondary-hover: var(--gray-700);
-  --secondary-foreground: var(--gray-100);
+  --secondary: oklch(14% 0 0);            /* #161616 surface */
+  --secondary-hover: oklch(18% 0 0);
+  --secondary-foreground: oklch(92% 0.006 75);
 
-  --muted: var(--gray-800);
-  --muted-foreground: var(--gray-400);
+  --muted: oklch(14% 0 0);
+  --muted-foreground: oklch(58% 0.006 75);
 
-  --card: var(--gray-900);
-  --card-border: var(--gray-800);
+  --card: oklch(14% 0 0);                 /* #161616 */
+  --card-border: oklch(22% 0 0);          /* #2A2A2A */
 
-  --input-bg: var(--gray-900);
-  --input-border: var(--gray-700);
-  --input-focus: var(--gray-0);
+  --input-bg: oklch(14% 0 0);
+  --input-border: oklch(28% 0 0);
+  --input-focus: var(--brand-300);
 
-  --ring: var(--gray-0);
+  --ring: var(--brand-300);
 
-  --accent: var(--gray-50);
-  --accent-hover: var(--gray-200);
-  --accent-light: var(--gray-800);
+  --accent: var(--brand-300);
+  --accent-hover: var(--brand-400);
+  --accent-light: oklch(14% 0 0);
 
   --destructive: oklch(65% 0.22 25);
   --destructive-foreground: var(--gray-0);

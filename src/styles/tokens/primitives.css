@@ -30,7 +30,7 @@
      brand-300 ≈ bright emerald for glows & dark-bg accents
      brand-500 = primary, WCAG AA readable on white
      ------------------------------------------------------------------------- */
-  --brand-hue: 162;
+  --brand-hue: 130;
   --brand-50: oklch(97% 0.02 var(--brand-hue));
   --brand-100: oklch(94% 0.04 var(--brand-hue));
   --brand-200: oklch(89% 0.08 var(--brand-hue));

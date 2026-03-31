@@ -1,0 +1,219 @@
+---
+/**
+ * The 14-Day Baseline Reset Challenge — Edition 2
+ * URL: /baseline-reset
+ */
+import LeadLayout from '@/layouts/LeadLayout.astro';
+import LeadCaptureForm from '@/components/forms/LeadCaptureForm.tsx';
+import Card from '@/components/ui/data-display/Card/Card.astro';
+
+const formTags = ['website_lead', 'baseline_challenge_ed2'];
+
+const termsHtml = `<p>By registering, I agree to receive communications. Unsubscribe anytime.</p>`;
+---
+
+<LeadLayout
+  title="The 14-Day Baseline Reset — Edition 2"
+  description="Three workouts a week. 25 minutes each. No equipment. Built for a calendar that never empties. Luxembourg financial services professionals, April 20–May 3."
+>
+  <div class="mx-auto max-w-[480px] px-6 pb-20">
+
+    <!-- ── SECTION 1: HOOK ── -->
+    <section class="py-10 border-b border-border">
+      <p class="text-xs font-semibold tracking-widest uppercase text-foreground-muted mb-5">
+        Edition 2 — April 20, 2026
+      </p>
+
+      <h1 class="font-display text-3xl font-bold tracking-tight text-foreground leading-snug mb-5">
+        Q1 is over.<br />
+        But not the audit season.<br />
+        Your body took the hit.
+      </h1>
+
+      <p class="text-base text-foreground-muted leading-relaxed mb-7">
+        You have less than twelve weeks before summer.
+        Two weeks. Three 25-minute workouts.
+        No equipment. Built for a calendar that never empties.
+      </p>
+
+      <a href="#register" class="block w-full text-center bg-foreground text-background font-semibold text-base rounded-lg py-4 px-5 no-underline">
+        Register now — €197
+      </a>
+    </section>
+
+
+    <!-- ── SECTION 2: PROOF ── -->
+    <section class="py-10 border-b border-border">
+      <p class="text-xs font-semibold tracking-widest uppercase text-foreground-muted mb-6">
+        What happened in Edition 1 — March 2026
+      </p>
+
+      <!-- Delphine — energy shift -->
+      <div class="border border-border rounded-xl overflow-hidden mb-5">
+        <div class="bg-secondary px-4 py-3 flex items-center gap-3 border-b border-border">
+          <div class="w-9 h-9 rounded-full bg-card flex items-center justify-center text-sm font-bold text-foreground-muted shrink-0">D</div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">Delphine H.</p>
+            <p class="text-xs text-foreground-muted mt-0.5">Senior Manager, Risk Consulting — Big Four Luxembourg</p>
+          </div>
+        </div>
+        <div class="p-4 space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-foreground-muted w-24 shrink-0">Before workout</span>
+            <div class="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
+              <div class="h-full bg-foreground rounded-full" style="width: 50%"></div>
+            </div>
+            <span class="text-sm font-semibold text-foreground w-8 text-right shrink-0">5/10</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-foreground-muted w-24 shrink-0">After workout</span>
+            <div class="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
+              <div class="h-full bg-foreground rounded-full" style="width: 90%"></div>
+            </div>
+            <span class="text-sm font-semibold text-foreground w-8 text-right shrink-0">9/10</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-foreground-muted w-24 shrink-0">End of day</span>
+            <div class="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
+              <div class="h-full bg-foreground rounded-full" style="width: 70%"></div>
+            </div>
+            <span class="text-sm font-semibold text-foreground w-8 text-right shrink-0">7/10</span>
+          </div>
+          <!-- REPLACE: swap the source line below for Delphine's Skool screenshot once she consents -->
+          <p class="text-xs text-foreground-muted pt-1">Day 3 community check-in · Skool</p>
+        </div>
+      </div>
+
+      <!-- Anonymous Garmin data -->
+      <!-- REPLACE: drop participant's Garmin watch screenshot into the card below -->
+      <div class="border border-border rounded-xl p-4 mb-5 flex gap-4 items-center">
+        <div class="w-16 h-16 rounded-full bg-[#0a1628] border-2 border-[#1e3a60] flex flex-col items-center justify-center shrink-0">
+          <span class="text-xl font-bold leading-none" style="color: #4fc3f7;">50</span>
+          <span class="text-[7px] mt-1 tracking-wide" style="color: #90caf9;">fitness age</span>
+        </div>
+        <div>
+          <p class="text-sm text-foreground leading-snug">
+            Day 3. Felt sharp all day.<br />
+            Garmin recorded a fitness age of 50.
+          </p>
+          <p class="text-xs text-foreground-muted mt-1.5">Community check-in · Day 3 · Skool</p>
+        </div>
+      </div>
+
+      <!-- Maxime Bruneau — LinkedIn -->
+      <!-- REPLACE: drop cropped LinkedIn recommendation screenshot into the card below -->
+      <div class="border border-border rounded-xl overflow-hidden mb-5">
+        <div class="bg-secondary px-4 py-3 flex items-center gap-3 border-b border-border">
+          <div class="w-9 h-9 rounded-full bg-card flex items-center justify-center text-sm font-bold text-foreground-muted shrink-0">MB</div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">Maxime Bruneau</p>
+            <p class="text-xs text-foreground-muted mt-0.5">Chief Compliance Officer &amp; Authorised Director</p>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-foreground-muted italic leading-relaxed">
+            "It held up under a real working week. This structure is a game changer."
+          </p>
+          <p class="text-xs text-foreground-muted mt-3">LinkedIn recommendation</p>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ── SECTION 3: WHAT IT IS ── -->
+    <section class="py-10 border-b border-border">
+      <p class="text-xs font-semibold tracking-widest uppercase text-foreground-muted mb-6">
+        What the 14 days look like
+      </p>
+
+      <span class="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-1.5 text-sm font-semibold text-foreground mb-6">
+        No equipment. No gym.
+      </span>
+
+      <p class="text-base text-foreground leading-relaxed mb-4">
+        Three workouts a week. 25 minutes each, filmed and waiting in the community before your first meeting.
+      </p>
+
+      <p class="text-base text-foreground leading-relaxed mb-6">
+        Every hour during the workday: 10 to 20 squats or two flights of stairs. Nothing that requires you to change or leave your desk.
+      </p>
+
+      <!-- REPLACE: embed or link the 60-second office squats client video here -->
+      <div class="bg-secondary border border-dashed border-border rounded-xl p-5 mb-5 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-card flex items-center justify-center text-xs font-bold text-foreground-muted shrink-0">▶</div>
+        <div>
+          <p class="text-sm text-foreground-muted leading-snug">Client doing hourly squats in the office — 60 seconds</p>
+          <p class="text-xs text-foreground-muted mt-1 opacity-60">Replace with video embed</p>
+        </div>
+      </div>
+
+      <p class="text-base text-foreground leading-relaxed mb-6">
+        The goal is not transformation in 14 days. The goal is to find out whether the routine holds when the board pack lands on Tuesday and the CSSF deadline moves to Friday.
+      </p>
+
+      <!-- REPLACE: embed the YouTube workout video here (25-min follow-along) -->
+      <div class="bg-secondary border border-dashed border-border rounded-xl p-5 mb-5 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-card flex items-center justify-center text-xs font-bold text-foreground-muted shrink-0">YT</div>
+        <div>
+          <p class="text-sm text-foreground-muted leading-snug">25-min workout — follow along from home or a hotel room</p>
+          <p class="text-xs text-foreground-muted mt-1 opacity-60">Replace with YouTube embed</p>
+        </div>
+      </div>
+
+      <!-- REPLACE: drop the Skool Wednesday Week 2 screenshot here -->
+      <div class="bg-secondary border border-dashed border-border rounded-xl p-5 flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-card flex items-center justify-center text-xs font-bold text-foreground-muted shrink-0">S</div>
+        <div>
+          <p class="text-sm text-foreground-muted leading-snug">The community checks in every single day. 28 posts in one thread, Week 2.</p>
+          <p class="text-xs text-foreground-muted mt-1 opacity-60">Replace with Skool screenshot — Wednesday Week 2, 28 comments</p>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ── SECTION 4: REGISTER ── -->
+    <section class="py-10" id="register">
+      <p class="text-xs font-semibold tracking-widest uppercase text-foreground-muted mb-6">
+        Register
+      </p>
+
+      <div class="bg-secondary rounded-xl p-5 mb-6">
+        <div class="flex justify-between items-baseline">
+          <span class="text-sm text-foreground-muted">Early bird</span>
+          <span class="font-display text-3xl font-bold text-foreground">€197</span>
+        </div>
+        <p class="text-xs text-foreground-muted mt-2">
+          April 20 – May 3 &nbsp;·&nbsp; Kickoff call April 20 &nbsp;·&nbsp; 8 participants max
+        </p>
+      </div>
+
+      <LeadCaptureForm
+        client:load
+        formTags={formTags}
+        submitLabel="Secure my spot"
+        defaultCountry="LU"
+        termsHtml={termsHtml}
+      />
+
+      <p class="text-xs text-foreground-muted text-center mt-4">
+        Registration closes April 18. Everyone starts on Day 1.
+      </p>
+
+      <!-- Alvin bio -->
+      <div class="flex gap-4 items-start p-5 border border-border rounded-xl mt-8">
+        <!-- REPLACE: swap the initials block below with your headshot <img> -->
+        <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-sm font-bold text-foreground-muted shrink-0">AS</div>
+        <div>
+          <p class="text-sm font-bold text-foreground">Alvin Sicre</p>
+          <p class="text-sm text-foreground-muted leading-relaxed mt-1">
+            18 years in Luxembourg financial services. Head of Compliance and Conducting Officer at EQT Partners, Aberdeen Standard, KPMG London. I left the industry in 2024 to build what had always kept me functional under pressure: a movement system that survives a real work week.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+</LeadLayout>

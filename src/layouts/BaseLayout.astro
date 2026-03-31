@@ -8,9 +8,6 @@ import { ClientRouter } from 'astro:transitions';
 import { createWebsiteSchema, createOrganizationSchema } from '@/lib/schema';
 import type { WebSite, Organization, WithContext } from 'schema-dts';
 import siteConfig from '@/config/site.config';
-// Demo: theme customizer + restore script. Customizer self-checks via /api/demo-mode at runtime.
-import ThemeCustomizer from '@/components/_demo/ThemeCustomizer.tsx';
-import DemoRestore from '@/components/_demo/DemoRestore.astro';
 
 interface Props {
   title?: string;
@@ -83,26 +80,11 @@ if (includeOrgSchema) {
 
     <!-- Theme script: follows system preference, persists across view transitions -->
     <script is:inline>
-      (function () {
-        var mq = window.matchMedia('(prefers-color-scheme: dark)');
-        function apply() {
-          // Demo customizer dark mode takes priority if set
-          var sfkDark = localStorage.getItem('sfk-dark');
-          if (sfkDark !== null) {
-            document.documentElement.classList.toggle('dark', sfkDark === '1');
-          } else {
-            document.documentElement.classList.toggle('dark', mq.matches);
-          }
-        }
-        apply();
-        mq.addEventListener('change', function () {
-          if (!localStorage.getItem('sfk-dark')) apply();
-        });
-        document.addEventListener('astro:after-swap', apply);
-      })();
+      document.documentElement.classList.add('dark');
+      document.addEventListener('astro:after-swap', function () {
+        document.documentElement.classList.add('dark');
+      });
     </script>
-
-    <DemoRestore />
   </head>
 
   <body class="flex min-h-screen flex-col bg-background text-foreground antialiased">
@@ -124,7 +106,5 @@ if (includeOrgSchema) {
 
     <ConsentBanner />
 
-    {/* Theme customizer — self-checks /api/demo-mode at runtime */}
-    <ThemeCustomizer client:only="react" />
   </body>
 </html>

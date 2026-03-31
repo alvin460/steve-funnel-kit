@@ -32,6 +32,12 @@ export default defineConfig({
     server: {
       allowedHosts: true,
     },
+    ssr: {
+      resolve: {
+        conditions: ['workerd', 'worker', 'browser'],
+        externalConditions: ['workerd', 'worker'],
+      },
+    },
   },
 
   markdown: {
